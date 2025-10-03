@@ -10,8 +10,12 @@ import {
   Target,
   Award,
   MapPin,
-  Briefcase
+  Briefcase,
+  HandCoins,
+  GraduationCap,
+  BadgeCheck
 } from "lucide-react";
+import nefLogo from "@/assets/nef-logo.png";
 
 const Index = () => {
   return (
@@ -20,16 +24,19 @@ const Index = () => {
       <section className="relative bg-gradient-hero py-20 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptMCAxMmMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnptLTEyIDBjMy4zMTQgMCA2IDIuNjg2IDYgNnMtMi42ODYgNi02IDYtNi0yLjY4Ni02LTYgMi42ODYtNiA2LTZ6bTAtMTJjMy4zMTQgMCA2IDIuNjg2IDYgNnMtMi42ODYgNi02IDYtNi0yLjY4Ni02LTYgMi42ODYtNiA2LTZ6IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPjwvZz48L3N2Zz4=')] opacity-30" />
         <div className="max-w-7xl mx-auto relative">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-              National Empowerment Fund
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Performance Report 2024 - Driving Economic Transformation and Empowerment Across South Africa
-            </p>
-            <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
-              <Target className="w-4 h-4" />
-              <span>Comprehensive overview of measurable impact and development outcomes</span>
+          <div className="flex flex-col items-center text-center space-y-6">
+            <img src={nefLogo} alt="National Empowerment Fund" className="h-24 md:h-32 w-auto" />
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+                Performance Report 2024
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+                Driving Economic Transformation and Empowerment Across South Africa
+              </p>
+              <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
+                <Target className="w-4 h-4" />
+                <span>Comprehensive overview of measurable impact and development outcomes</span>
+              </div>
             </div>
           </div>
         </div>
@@ -39,7 +46,7 @@ const Index = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <MetricCard
-            icon={DollarSign}
+            icon={HandCoins}
             title="Total Funding Disbursed"
             value="R8.4bn"
             change="+24%"
@@ -66,6 +73,81 @@ const Index = () => {
             change="+12%"
             description="B-BBEE compliance rate"
           />
+        </div>
+      </section>
+
+      {/* Life to Date Performance Milestones */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-2">Life to Date Performance Milestones</h2>
+          <p className="text-muted-foreground">Since operations began in 2005 (as of 31 May 2025)</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-primary/10">
+                <HandCoins className="w-10 h-10 text-primary" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Approved</p>
+            <p className="text-4xl font-bold text-foreground mb-2">R12.8bn</p>
+            <p className="text-xs text-muted-foreground">for black entrepreneurs</p>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-success/10">
+                <GraduationCap className="w-10 h-10 text-success" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Reached</p>
+            <p className="text-4xl font-bold text-foreground mb-2">158,000+</p>
+            <p className="text-xs text-muted-foreground">people through community seminars on how to save and invest</p>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-info/10">
+                <Building2 className="w-10 h-10 text-info" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Projects worth</p>
+            <p className="text-4xl font-bold text-foreground mb-2">R45.2bn</p>
+            <p className="text-xs text-muted-foreground">coinvested to support black industrialists</p>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-warning/10">
+                <Users className="w-10 h-10 text-warning" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Over</p>
+            <p className="text-4xl font-bold text-foreground mb-2">142,000</p>
+            <p className="text-xs text-muted-foreground">jobs created and sustained</p>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-primary/10">
+                <BadgeCheck className="w-10 h-10 text-primary" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Achieved</p>
+            <p className="text-4xl font-bold text-foreground mb-2">20 Years</p>
+            <p className="text-xs text-muted-foreground">of clean external audits</p>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card backdrop-blur-sm border-border/50 text-center hover:shadow-lg transition-all">
+            <div className="flex justify-center mb-4">
+              <div className="p-4 rounded-full bg-success/10">
+                <TrendingUp className="w-10 h-10 text-success" />
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-2">Over</p>
+            <p className="text-4xl font-bold text-foreground mb-2">R3.8bn</p>
+            <p className="text-xs text-muted-foreground">has been repaid by investees</p>
+          </Card>
         </div>
       </section>
 
