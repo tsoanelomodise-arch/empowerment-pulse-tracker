@@ -18,9 +18,11 @@ import {
   Download
 } from "lucide-react";
 import nefLogo from "@/assets/nef-logo.png";
-import { generatePDF } from "@/utils/pdfGenerator";
 
 const Index = () => {
+  const handleDownloadPDF = () => {
+    window.print();
+  };
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -41,7 +43,7 @@ const Index = () => {
                 <span>Comprehensive overview of measurable impact and development outcomes</span>
               </div>
               <Button 
-                onClick={generatePDF}
+                onClick={handleDownloadPDF}
                 size="lg"
                 className="mt-4 bg-white text-primary hover:bg-white/90"
               >
