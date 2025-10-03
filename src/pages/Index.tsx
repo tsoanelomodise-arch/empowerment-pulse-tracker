@@ -2,6 +2,7 @@ import { MetricCard } from "@/components/MetricCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { SectorCard } from "@/components/SectorCard";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { 
   TrendingUp, 
   Building2, 
@@ -13,9 +14,11 @@ import {
   Briefcase,
   HandCoins,
   GraduationCap,
-  BadgeCheck
+  BadgeCheck,
+  Download
 } from "lucide-react";
 import nefLogo from "@/assets/nef-logo.png";
+import { generatePDF } from "@/utils/pdfGenerator";
 
 const Index = () => {
   return (
@@ -37,6 +40,14 @@ const Index = () => {
                 <Target className="w-4 h-4" />
                 <span>Comprehensive overview of measurable impact and development outcomes</span>
               </div>
+              <Button 
+                onClick={generatePDF}
+                size="lg"
+                className="mt-4 bg-white text-primary hover:bg-white/90"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download PDF Report
+              </Button>
             </div>
           </div>
         </div>
