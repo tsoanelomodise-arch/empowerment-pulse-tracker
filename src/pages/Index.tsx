@@ -18,6 +18,7 @@ import {
   Download
 } from "lucide-react";
 import nefLogo from "@/assets/nef-logo.png";
+import { REPORT_YEAR, reportTitle } from "@/config/report";
 
 const Index = () => {
   const handleDownloadPDF = () => {
@@ -33,7 +34,7 @@ const Index = () => {
             <img src={nefLogo} alt="National Empowerment Fund" className="h-24 md:h-32 w-auto" />
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-                Performance Report 2024
+                {reportTitle(REPORT_YEAR)}
               </h1>
               <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
                 Driving Economic Transformation and Empowerment Across South Africa
@@ -392,7 +393,7 @@ const Index = () => {
           <h3 className="text-2xl font-bold text-white mb-4">National Empowerment Fund</h3>
           <p className="text-white/80 mb-6">Driving Economic Transformation Since 1998</p>
           <div className="flex items-center justify-center gap-8 text-white/60 text-sm">
-            <span>Performance Report 2024</span>
+            <span>{reportTitle(REPORT_YEAR)}</span>
             <span>•</span>
             <span>www.nefcorp.co.za</span>
             <span>•</span>
