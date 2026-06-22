@@ -113,37 +113,72 @@ const Index = () => {
       </section>
 
       {/* ====== KEY METRICS ====== */}
-      <section id="metrics" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+      <section id="metrics" className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
         <SectionLabel number="01" title="Key Metrics" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            icon={HandCoins}
-            title="Total Funding Disbursed"
-            value="R8.4bn"
-            change="+24%"
-            description="Cumulative funding to date"
-          />
-          <MetricCard
-            icon={Building2}
-            title="Enterprises Funded"
-            value="2,847"
-            change="+18%"
-            description="Active businesses supported"
-          />
-          <MetricCard
-            icon={Users}
-            title="Jobs Created"
-            value="67,234"
-            change="+31%"
-            description="Direct & indirect employment"
-          />
-          <MetricCard
-            icon={TrendingUp}
-            title="Transformation Score"
-            value="89.6%"
-            change="+12%"
-            description="B-BBEE compliance rate"
-          />
+
+        {/* Editorial header row */}
+        <div className="grid grid-cols-12 gap-6 mb-12 items-end border-b border-border pb-8">
+          <div className="col-span-12 md:col-span-7">
+            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.85] tracking-tight">
+              Key
+              <br />
+              Metrics
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-5 md:text-right">
+            <p className="font-mono-label text-xs text-muted-foreground mb-2">{REPORT_YEAR} / Snapshot</p>
+            <p className="text-sm md:text-base text-muted-foreground max-w-sm md:ml-auto">
+              Driving Economic Transformation and Empowerment Across South Africa
+            </p>
+          </div>
+        </div>
+
+        {/* Asymmetric infographic grid */}
+        <div className="grid grid-cols-12 gap-px bg-border border border-border rounded-3xl overflow-hidden">
+          {/* Feature card: Total Funding */}
+          <div className="col-span-12 lg:col-span-7 bg-[#1a1410] text-white p-8 md:p-12 relative group">
+            <div className="flex items-start justify-between mb-10">
+              <div className="flex items-center gap-3">
+                <HandCoins className="w-6 h-6 text-primary" strokeWidth={1.5} />
+                <span className="font-mono-label text-xs text-white/60">01 — Total Funding Disbursed</span>
+              </div>
+              <span className="font-mono-label text-xs px-3 py-1 rounded-full border border-primary/40 text-primary">+24%</span>
+            </div>
+            <p className="font-display text-7xl md:text-9xl lg:text-[11rem] leading-[0.85] group-hover:text-primary transition-colors">
+              R8.4<span className="text-primary">bn</span>
+            </p>
+            <div className="mt-10 flex items-end justify-between gap-6 pt-6 border-t border-white/15">
+              <p className="text-sm text-white/70 max-w-xs">Cumulative funding to date</p>
+              <div className="hidden md:flex items-end gap-1 h-12">
+                {[40, 55, 48, 70, 65, 82, 78, 95, 88, 100].map((h, i) => (
+                  <span key={i} className="w-2 bg-primary/70 rounded-sm" style={{ height: `${h}%` }} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right column: 3 stacked */}
+          <div className="col-span-12 lg:col-span-5 grid grid-cols-1 gap-px bg-border">
+            {[
+              { icon: Building2, num: "02", title: "Enterprises Funded", value: "2,847", change: "+18%", desc: "Active businesses supported" },
+              { icon: Users, num: "03", title: "Jobs Created", value: "67,234", change: "+31%", desc: "Direct & indirect employment" },
+              { icon: TrendingUp, num: "04", title: "Transformation Score", value: "89.6%", change: "+12%", desc: "B-BBEE compliance rate" },
+            ].map((m) => (
+              <div key={m.num} className="bg-background p-6 md:p-8 hover:bg-muted/40 transition-colors group">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <m.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                    <span className="font-mono-label text-xs text-muted-foreground">{m.num} — {m.title}</span>
+                  </div>
+                  <span className="font-mono-label text-xs text-success">{m.change}</span>
+                </div>
+                <p className="font-display text-5xl md:text-6xl leading-[0.9] group-hover:text-primary transition-colors">
+                  {m.value}
+                </p>
+                <p className="mt-3 text-xs text-muted-foreground">{m.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
