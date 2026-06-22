@@ -250,26 +250,98 @@ const Index = () => {
       </section>
 
       {/* ====== SECTORS ====== */}
-      <section id="sectors" className="bg-muted/40 py-20 px-4 sm:px-6 lg:px-8">
+      <section id="sectors" className="bg-[#f5f0e6] py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <SectionLabel number="04" title="Distribution" />
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-            <h2 className="font-display text-4xl md:text-6xl leading-[0.9] max-w-2xl">
-              Sector Distribution
-            </h2>
-            <p className="text-muted-foreground md:text-right max-w-sm">
-              Funding allocation across key economic sectors
-            </p>
+
+          {/* Editorial header */}
+          <div className="grid grid-cols-12 gap-6 mb-16 items-end">
+            <div className="col-span-12 md:col-span-7">
+              <h2 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.85] text-[#1a1410]">
+                Sector
+                <br />
+                Distribution
+              </h2>
+              <span className="block w-16 h-px bg-[#1a1410]/40 mt-6" />
+            </div>
+            <div className="col-span-12 md:col-span-5 md:text-right">
+              <p className="text-base text-[#1a1410]/70 max-w-sm md:ml-auto leading-relaxed">
+                Funding allocation across key economic sectors
+              </p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <SectorCard title="Manufacturing" value="687" percentage={28} growth="+22%" />
-            <SectorCard title="Agriculture" value="542" percentage={22} growth="+18%" />
-            <SectorCard title="Tourism & Hospitality" value="456" percentage={19} growth="+25%" />
-            <SectorCard title="Technology & Innovation" value="384" percentage={16} growth="+42%" />
-            <SectorCard title="Retail & Services" value="312" percentage={13} growth="+15%" />
-            <SectorCard title="Construction" value="234" percentage={10} growth="+12%" />
-            <SectorCard title="Energy & Mining" value="156" percentage={6} growth="+8%" />
-            <SectorCard title="Healthcare" value="124" percentage={5} growth="+28%" />
+
+          {/* Infographic: stats list + concentric rings */}
+          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left: top 4 with percentages */}
+            <div className="col-span-12 lg:col-span-5 space-y-8 order-2 lg:order-1">
+              {[
+                { title: "Manufacturing", value: "687", percentage: 28, growth: "+22%" },
+                { title: "Agriculture", value: "542", percentage: 22, growth: "+18%" },
+                { title: "Tourism & Hospitality", value: "456", percentage: 19, growth: "+25%" },
+                { title: "Technology & Innovation", value: "384", percentage: 16, growth: "+42%" },
+              ].map((s) => (
+                <div key={s.title} className="flex items-baseline gap-6 group">
+                  <p className="font-display text-5xl md:text-6xl text-[#1a1410] group-hover:text-primary transition-colors w-28 shrink-0">
+                    {s.percentage}%
+                  </p>
+                  <div className="flex-1 border-b border-[#1a1410]/15 pb-3">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <h3 className="font-display text-xl text-[#1a1410]">{s.title}</h3>
+                      <span className="font-mono-label text-xs text-success shrink-0">{s.growth}</span>
+                    </div>
+                    <div className="flex items-baseline justify-between mt-1">
+                      <p className="text-sm text-[#1a1410]/60">{s.value} Enterprises</p>
+                      <span className="font-mono-label text-[10px] text-[#1a1410]/40">of total</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: concentric ring infographic */}
+            <div className="col-span-12 lg:col-span-7 order-1 lg:order-2 relative">
+              <div className="relative aspect-square max-w-xl mx-auto">
+                <svg viewBox="0 0 400 400" className="w-full h-full">
+                  {[
+                    { r: 180, color: "#1a1410", op: 0.95 },
+                    { r: 150, color: "#3a2f28", op: 0.85 },
+                    { r: 120, color: "#5a4a3f", op: 0.75 },
+                    { r: 90, color: "#8a7868", op: 0.7 },
+                    { r: 60, color: "#F37021", op: 0.95 },
+                  ].map((c, i) => (
+                    <circle key={i} cx="200" cy="200" r={c.r} fill={c.color} opacity={c.op} />
+                  ))}
+                  <path
+                    d="M 200 20 A 180 180 0 0 1 380 200 L 200 200 Z"
+                    fill="#f5f0e6"
+                    opacity="0.18"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom row: remaining 4 sectors */}
+          <div className="mt-20 pt-10 border-t border-[#1a1410]/15 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-8">
+            {[
+              { title: "Retail & Services", value: "312", percentage: 13, growth: "+15%" },
+              { title: "Construction", value: "234", percentage: 10, growth: "+12%" },
+              { title: "Energy & Mining", value: "156", percentage: 6, growth: "+8%" },
+              { title: "Healthcare", value: "124", percentage: 5, growth: "+28%" },
+            ].map((s) => (
+              <div key={s.title} className="group">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="font-mono-label text-[10px] text-[#1a1410]/50">of total</span>
+                  <span className="font-mono-label text-xs text-success">{s.growth}</span>
+                </div>
+                <p className="font-display text-4xl text-[#1a1410] group-hover:text-primary transition-colors">
+                  {s.percentage}%
+                </p>
+                <h3 className="font-display text-lg text-[#1a1410] mt-2">{s.title}</h3>
+                <p className="text-sm text-[#1a1410]/60 mt-1">{s.value} Enterprises</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
