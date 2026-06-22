@@ -56,7 +56,6 @@ const Index = () => {
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img src={nefLogo} alt="National Empowerment Fund" className="h-10 md:h-12 w-auto" />
-              <span className="hidden sm:inline font-display text-white text-lg tracking-wider">NEF.</span>
             </div>
             <nav className="hidden md:flex items-center gap-8 font-mono-label text-xs text-white/90">
               <a href="#metrics" className="hover:text-primary transition-colors">Metrics</a>
