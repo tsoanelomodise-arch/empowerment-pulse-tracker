@@ -76,7 +76,7 @@ const Index = () => {
           {/* Main hero title */}
           <div className="flex-1 flex flex-col justify-end pb-6">
             <div className="max-w-5xl ml-auto text-right">
-              <h1 className="font-display text-white text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] xl:text-[12rem] leading-[0.85]">
+              <h1 className="font-display text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.85] break-words">
                 PERFORMANCE
                 <br />
                 REPORT {REPORT_YEAR}
