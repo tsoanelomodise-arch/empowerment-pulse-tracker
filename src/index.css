@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .font-display { font-family: 'Archivo Black', 'Archivo', sans-serif; letter-spacing: -0.01em; }
+  .font-mono-label { font-family: 'Archivo', sans-serif; letter-spacing: 0.18em; text-transform: uppercase; }
+}
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
