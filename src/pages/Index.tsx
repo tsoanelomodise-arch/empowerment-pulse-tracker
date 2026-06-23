@@ -376,37 +376,111 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="p-8 md:p-10 bg-gradient-card backdrop-blur-sm border-border/50">
-            <div className="flex items-start gap-4 mb-8">
-              <div className="p-3 rounded-full bg-primary/10">
-                <MapPin className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-display text-2xl md:text-3xl text-foreground mb-1">Geographic Reach</h3>
-                <p className="text-sm text-muted-foreground">Nationwide footprint and impact</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              {[
-                { name: "Gauteng", count: "847 enterprises", pct: "32%" },
-                { name: "Western Cape", count: "623 enterprises", pct: "24%" },
-                { name: "KwaZulu-Natal", count: "512 enterprises", pct: "19%" },
-                { name: "Eastern Cape", count: "387 enterprises", pct: "15%" },
-                { name: "Other Provinces", count: "478 enterprises", pct: "18%" },
-              ].map((p) => (
-                <div
-                  key={p.name}
-                  className="flex items-center justify-between p-4 rounded-xl bg-background/60 border border-border/50 hover:border-primary/40 transition-colors"
-                >
-                  <span className="font-medium text-foreground">{p.name}</span>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm text-muted-foreground">{p.count}</span>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary min-w-[3rem] text-center">
-                      {p.pct}
-                    </span>
-                  </div>
+          <Card className="relative p-0 overflow-hidden border-0 rounded-3xl bg-[#0c1f14] text-white shadow-2xl">
+            {/* Aerial satellite-style backdrop */}
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-[0.45]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 22% 28%, #2d5a3d 0, transparent 38%), radial-gradient(circle at 78% 18%, #1a3c2a 0, transparent 42%), radial-gradient(circle at 70% 78%, #0f3a24 0, transparent 50%), radial-gradient(circle at 30% 80%, #244a30 0, transparent 45%), linear-gradient(135deg, #0c1f14 0%, #163827 100%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-[0.18] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(45deg, rgba(255,255,255,0.15) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 22px)",
+              }}
+            />
+            {/* Sun flare */}
+            <div
+              aria-hidden
+              className="absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl"
+              style={{ background: "radial-gradient(circle, rgba(243,112,33,0.35), transparent 60%)" }}
+            />
+
+            {/* Giant concentric ring */}
+            <svg
+              aria-hidden
+              className="absolute -left-40 top-1/2 -translate-y-1/2 w-[640px] h-[640px] opacity-60"
+              viewBox="0 0 600 600"
+              fill="none"
+            >
+              <circle cx="300" cy="300" r="280" stroke="#5a8a5c" strokeWidth="40" strokeDasharray="1400 600" />
+              <circle cx="300" cy="300" r="220" stroke="#a0c49d" strokeWidth="2" opacity="0.4" />
+              <circle cx="300" cy="300" r="160" stroke="#a0c49d" strokeWidth="2" opacity="0.25" />
+            </svg>
+
+            <div className="relative p-8 md:p-10">
+              <div className="flex items-start gap-4 mb-10">
+                <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
+                  <MapPin className="w-6 h-6 text-[#a0c49d]" />
                 </div>
-              ))}
+                <div>
+                  <h3 className="font-display text-2xl md:text-3xl text-white mb-1">Geographic Reach</h3>
+                  <p className="text-sm text-white/60">Nationwide footprint and impact</p>
+                </div>
+              </div>
+
+              {/* Featured province — hero stat */}
+              {(() => {
+                const provinces = [
+                  { name: "Gauteng", count: "847 enterprises", pct: "32%" },
+                  { name: "Western Cape", count: "623 enterprises", pct: "24%" },
+                  { name: "KwaZulu-Natal", count: "512 enterprises", pct: "19%" },
+                  { name: "Eastern Cape", count: "387 enterprises", pct: "15%" },
+                  { name: "Other Provinces", count: "478 enterprises", pct: "18%" },
+                ];
+                const [hero, ...rest] = provinces;
+                return (
+                  <>
+                    <div className="relative mb-8 pb-8 border-b border-white/10">
+                      <p className="font-mono-label text-[10px] text-white/50 mb-3">Leading region</p>
+                      <div className="flex items-end justify-between gap-4 flex-wrap">
+                        <div>
+                          <h4 className="font-display text-5xl md:text-6xl text-white leading-none tracking-tight">
+                            {hero.pct}
+                          </h4>
+                          <p className="text-white/70 mt-3 text-sm">{hero.count}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-display text-2xl md:text-3xl text-[#F37021]">{hero.name}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      {rest.map((p) => {
+                        const pctNum = parseInt(p.pct, 10);
+                        return (
+                          <div
+                            key={p.name}
+                            className="group relative overflow-hidden p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#F37021]/50 hover:bg-white/[0.07] transition-all"
+                          >
+                            <div
+                              aria-hidden
+                              className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#F37021]/15 to-transparent transition-all"
+                              style={{ width: `${pctNum * 3}%` }}
+                            />
+                            <div className="relative flex items-center justify-between gap-4">
+                              <div className="flex items-center gap-3 min-w-0">
+                                <span className="w-1.5 h-8 rounded-full bg-[#a0c49d] group-hover:bg-[#F37021] transition-colors" />
+                                <div className="min-w-0">
+                                  <p className="font-medium text-white truncate">{p.name}</p>
+                                  <p className="text-xs text-white/50 mt-0.5">{p.count}</p>
+                                </div>
+                              </div>
+                              <span className="font-display text-xl text-white tabular-nums">{p.pct}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              })()}
             </div>
           </Card>
         </div>
