@@ -227,26 +227,98 @@ const Index = () => {
       {/* ====== KPIs ====== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <SectionLabel number="03" title="Performance" />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
-          <div className="lg:col-span-1">
-            <h2 className="font-display text-4xl md:text-5xl leading-[0.95] mb-4">
-              Key Performance Indicators
-            </h2>
-            <p className="text-muted-foreground">
-              Progress across critical transformation metrics
-            </p>
-          </div>
-          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-            <ProgressBar label="Business Development" value={92} color="primary" />
-            <ProgressBar label="Black Ownership" value={94} color="primary" />
-            <ProgressBar label="Skills Development" value={87} color="success" />
-            <ProgressBar label="Women Empowerment" value={76} color="success" />
-            <ProgressBar label="Market Access" value={78} color="info" />
-            <ProgressBar label="Youth Development" value={68} color="info" />
-            <ProgressBar label="Financial Inclusion" value={85} color="warning" />
-            <ProgressBar label="Rural Development" value={72} color="warning" />
-          </div>
-        </div>
+        {(() => {
+          const kpis = [
+            { label: "Business Development", value: 92 },
+            { label: "Black Ownership", value: 94 },
+            { label: "Skills Development", value: 87 },
+            { label: "Women Empowerment", value: 76 },
+            { label: "Market Access", value: 78 },
+            { label: "Youth Development", value: 68 },
+            { label: "Financial Inclusion", value: 85 },
+            { label: "Rural Development", value: 72 },
+          ];
+          const maxVal = Math.max(...kpis.map((k) => k.value));
+          return (
+            <div className="relative rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1f1f1f] p-8 md:p-12 lg:p-16 shadow-2xl">
+              {/* soft ambient highlights */}
+              <div className="absolute inset-0 opacity-60 pointer-events-none"
+                   style={{ background: "radial-gradient(circle at 15% 10%, rgba(255,255,255,0.08), transparent 45%), radial-gradient(circle at 85% 90%, rgba(243,112,33,0.12), transparent 50%)" }} />
+              <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+                {/* Heading */}
+                <div className="lg:col-span-5">
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F37021]" />
+                    <span className="font-mono-label text-[10px] tracking-[0.2em] text-white/50 uppercase">
+                      KPI Index · {REPORT_YEAR}
+                    </span>
+                  </div>
+                  <h2 className="font-display text-4xl md:text-5xl lg:text-6xl leading-[0.95] text-white mb-6">
+                    Key Performance<br/>Indicators
+                  </h2>
+                  <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-md">
+                    Progress across critical transformation metrics
+                  </p>
+                  <div className="mt-8 inline-flex items-baseline gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <span className="font-display text-3xl text-[#F37021] tabular-nums">{maxVal}%</span>
+                    <span className="font-mono-label text-[10px] tracking-[0.18em] text-white/60 uppercase">peak metric</span>
+                  </div>
+                </div>
+
+                {/* Bar chart */}
+                <div className="lg:col-span-7">
+                  <div className="relative h-[340px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
+                    {/* gridlines */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {[100, 75, 50, 25].map((g) => (
+                        <div key={g} className="absolute left-0 right-0 border-t border-dashed border-white/5 flex justify-end pr-1"
+                             style={{ bottom: `${g}%` }}>
+                          <span className="font-mono-label text-[9px] text-white/25 -translate-y-1/2 bg-transparent">{g}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {kpis.map((k) => {
+                      const isPeak = k.value === maxVal;
+                      const h = `${k.value}%`;
+                      return (
+                        <div key={k.label} className="group relative flex-1 flex flex-col items-center justify-end h-full">
+                          {/* value label */}
+                          <span className={`font-display text-sm md:text-base mb-2 tabular-nums transition-colors ${isPeak ? "text-[#F37021]" : "text-white/80"}`}>
+                            {k.value}%
+                          </span>
+                          {/* bar */}
+                          <div
+                            className={`relative w-full rounded-t-lg overflow-hidden transition-all duration-300 group-hover:brightness-110 ${
+                              isPeak
+                                ? "bg-gradient-to-t from-[#F37021] to-[#ff8a3d] shadow-[0_0_40px_rgba(243,112,33,0.4)]"
+                                : "bg-white/[0.06] border border-white/10 border-b-0"
+                            }`}
+                            style={{ height: h }}
+                          >
+                            {!isPeak && (
+                              <div className="absolute inset-0 opacity-40"
+                                   style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "6px 6px" }} />
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {/* x-axis labels */}
+                  <div className="flex gap-2 md:gap-3 pl-2 mt-4">
+                    {kpis.map((k) => (
+                      <div key={k.label} className="flex-1 text-center">
+                        <span className="font-mono-label text-[9px] md:text-[10px] tracking-wide text-white/50 leading-tight block">
+                          {k.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </section>
 
       {/* ====== SECTORS ====== */}
