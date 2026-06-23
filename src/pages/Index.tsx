@@ -376,55 +376,146 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="relative p-0 overflow-hidden border-0 rounded-3xl bg-[#0c1f14] text-white shadow-2xl">
-            {/* Aerial satellite-style backdrop */}
+          <Card className="relative p-0 overflow-hidden border-0 rounded-3xl bg-[#0a0a0a] text-white shadow-2xl">
+            {/* Deep space backdrop */}
             <div
               aria-hidden
-              className="absolute inset-0 opacity-[0.45]"
+              className="absolute inset-0"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 22% 28%, #2d5a3d 0, transparent 38%), radial-gradient(circle at 78% 18%, #1a3c2a 0, transparent 42%), radial-gradient(circle at 70% 78%, #0f3a24 0, transparent 50%), radial-gradient(circle at 30% 80%, #244a30 0, transparent 45%), linear-gradient(135deg, #0c1f14 0%, #163827 100%)",
+                  "radial-gradient(ellipse at 30% 20%, rgba(45,90,61,0.25) 0, transparent 55%), radial-gradient(ellipse at 75% 80%, rgba(243,112,33,0.12) 0, transparent 60%), linear-gradient(180deg, #0a0a0a 0%, #111814 100%)",
               }}
             />
+            {/* Grid overlay */}
             <div
               aria-hidden
-              className="absolute inset-0 opacity-[0.18] mix-blend-overlay"
+              className="absolute inset-0 opacity-[0.08]"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(45deg, rgba(255,255,255,0.15) 0 1px, transparent 1px 14px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 22px)",
+                  "linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)",
+                backgroundSize: "80px 80px",
               }}
             />
-            {/* Sun flare */}
+            {/* Noise / dust */}
             <div
               aria-hidden
-              className="absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl"
-              style={{ background: "radial-gradient(circle, rgba(243,112,33,0.35), transparent 60%)" }}
+              className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 15% 60%, rgba(255,255,255,0.08) 0, transparent 25%), radial-gradient(circle at 85% 30%, rgba(255,255,255,0.06) 0, transparent 30%)",
+              }}
             />
-
-            {/* Giant concentric ring */}
-            <svg
-              aria-hidden
-              className="absolute -left-40 top-1/2 -translate-y-1/2 w-[640px] h-[640px] opacity-60"
-              viewBox="0 0 600 600"
-              fill="none"
-            >
-              <circle cx="300" cy="300" r="280" stroke="#5a8a5c" strokeWidth="40" strokeDasharray="1400 600" />
-              <circle cx="300" cy="300" r="220" stroke="#a0c49d" strokeWidth="2" opacity="0.4" />
-              <circle cx="300" cy="300" r="160" stroke="#a0c49d" strokeWidth="2" opacity="0.25" />
-            </svg>
 
             <div className="relative p-8 md:p-10">
-              <div className="flex items-start gap-4 mb-10">
-                <div className="p-3 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15">
-                  <MapPin className="w-6 h-6 text-[#a0c49d]" />
+              <div className="flex items-start gap-4 mb-8">
+                <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+                  <MapPin className="w-6 h-6 text-white/80" />
                 </div>
                 <div>
                   <h3 className="font-display text-2xl md:text-3xl text-white mb-1">Geographic Reach</h3>
-                  <p className="text-sm text-white/60">Nationwide footprint and impact</p>
+                  <p className="text-sm text-white/50">Nationwide footprint and impact</p>
                 </div>
               </div>
 
-              {/* Featured province — hero stat */}
+              {/* Provinces list header (reference-style) */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="font-mono-label text-[11px] tracking-[0.25em] text-white/70">PROVINCES REACHED</span>
+                  <span className="flex-1 h-px bg-white/30" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-1.5 text-right sm:text-right">
+                  {["Gauteng", "Western Cape", "KwaZulu-Natal", "Eastern Cape", "Other Provinces"].map((n) => (
+                    <p
+                      key={n}
+                      className="font-mono-label text-[11px] tracking-[0.18em] text-white/75"
+                    >
+                      ZA · <span className="text-white">{n.toUpperCase()}</span>
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Stylized SA map with connector lines */}
+              <div className="relative mb-10">
+                <svg
+                  viewBox="0 0 600 420"
+                  className="w-full h-auto"
+                  fill="none"
+                  aria-hidden
+                >
+                  <defs>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="2" result="b" />
+                      <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  {/* SA outline (simplified) */}
+                  <path
+                    d="M150,140 L210,115 L260,108 L305,118 L345,108 L385,118 L420,135 L455,160 L480,195 L495,235 L488,275 L470,310 L440,335 L398,348 L355,352 L310,348 L268,338 L228,318 L195,290 L172,255 L158,215 L150,175 Z"
+                    stroke="rgba(255,255,255,0.85)"
+                    strokeWidth="1.5"
+                    fill="rgba(255,255,255,0.02)"
+                  />
+                  {/* Internal province dividers */}
+                  <g stroke="rgba(255,255,255,0.35)" strokeWidth="1" strokeDasharray="3 3">
+                    <path d="M260,108 L270,200 L228,318" />
+                    <path d="M345,108 L330,210 L310,348" />
+                    <path d="M420,135 L370,220 L440,335" />
+                    <path d="M195,290 L330,210 L495,235" />
+                    <path d="M270,200 L370,220" />
+                  </g>
+                  {/* Lesotho hole */}
+                  <circle cx="378" cy="265" r="22" stroke="rgba(255,255,255,0.5)" strokeWidth="1" />
+
+                  {/* Markers + connector lines */}
+                  {/* Gauteng */}
+                  <g filter="url(#glow)">
+                    <circle cx="335" cy="180" r="7" stroke="#F37021" strokeWidth="2" fill="#0a0a0a" />
+                    <circle cx="335" cy="180" r="2.5" fill="#F37021" />
+                  </g>
+                  <path d="M335,180 L335,80 L505,80" stroke="#F37021" strokeWidth="1" />
+                  <text x="510" y="78" fill="#F37021" fontSize="11" letterSpacing="2" fontFamily="monospace">
+                    GAUTENG · 32%
+                  </text>
+
+                  {/* Western Cape */}
+                  <circle cx="225" cy="310" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
+                  <circle cx="225" cy="310" r="2" fill="rgba(255,255,255,0.9)" />
+                  <path d="M225,310 L100,360 L25,360" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+                  <text x="20" y="358" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                    W.CAPE · 24%
+                  </text>
+
+                  {/* KZN */}
+                  <circle cx="425" cy="265" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
+                  <circle cx="425" cy="265" r="2" fill="rgba(255,255,255,0.9)" />
+                  <path d="M425,265 L530,260 L575,260" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+                  <text x="510" y="278" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                    KZN · 19%
+                  </text>
+
+                  {/* Eastern Cape */}
+                  <circle cx="370" cy="330" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
+                  <circle cx="370" cy="330" r="2" fill="rgba(255,255,255,0.9)" />
+                  <path d="M370,330 L370,395 L505,395" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+                  <text x="510" y="398" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                    E.CAPE · 15%
+                  </text>
+
+                  {/* Other */}
+                  <circle cx="275" cy="200" r="5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" fill="#0a0a0a" />
+                  <circle cx="275" cy="200" r="1.8" fill="rgba(255,255,255,0.7)" />
+                  <path d="M275,200 L275,40 L25,40" stroke="rgba(255,255,255,0.45)" strokeWidth="1" />
+                  <text x="20" y="38" fill="rgba(255,255,255,0.75)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                    OTHER · 18%
+                  </text>
+                </svg>
+              </div>
+
+              {/* Featured province + ranked list */}
               {(() => {
                 const provinces = [
                   { name: "Gauteng", count: "847 enterprises", pct: "32%" },
@@ -437,13 +528,13 @@ const Index = () => {
                 return (
                   <>
                     <div className="relative mb-8 pb-8 border-b border-white/10">
-                      <p className="font-mono-label text-[10px] text-white/50 mb-3">Leading region</p>
+                      <p className="font-mono-label text-[10px] tracking-[0.25em] text-white/50 mb-3">LEADING REGION</p>
                       <div className="flex items-end justify-between gap-4 flex-wrap">
                         <div>
                           <h4 className="font-display text-5xl md:text-6xl text-white leading-none tracking-tight">
                             {hero.pct}
                           </h4>
-                          <p className="text-white/70 mt-3 text-sm">{hero.count}</p>
+                          <p className="text-white/60 mt-3 text-sm">{hero.count}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-display text-2xl md:text-3xl text-[#F37021]">{hero.name}</p>
@@ -457,7 +548,7 @@ const Index = () => {
                         return (
                           <div
                             key={p.name}
-                            className="group relative overflow-hidden p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-[#F37021]/50 hover:bg-white/[0.07] transition-all"
+                            className="group relative overflow-hidden p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#F37021]/50 hover:bg-white/[0.06] transition-all"
                           >
                             <div
                               aria-hidden
@@ -466,7 +557,7 @@ const Index = () => {
                             />
                             <div className="relative flex items-center justify-between gap-4">
                               <div className="flex items-center gap-3 min-w-0">
-                                <span className="w-1.5 h-8 rounded-full bg-[#a0c49d] group-hover:bg-[#F37021] transition-colors" />
+                                <span className="w-1.5 h-8 rounded-full bg-white/60 group-hover:bg-[#F37021] transition-colors" />
                                 <div className="min-w-0">
                                   <p className="font-medium text-white truncate">{p.name}</p>
                                   <p className="text-xs text-white/50 mt-0.5">{p.count}</p>
