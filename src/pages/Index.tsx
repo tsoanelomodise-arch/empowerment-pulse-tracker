@@ -265,9 +265,9 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Bar chart */}
-                <div className="lg:col-span-7">
-                  <div className="relative h-[340px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
+                {/* Bar chart — desktop / tablet */}
+                <div className="lg:col-span-7 hidden sm:block">
+                  <div className="relative h-[300px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
                     {/* gridlines */}
                     <div className="absolute inset-0 pointer-events-none">
                       {[100, 75, 50, 25].map((g) => (
@@ -282,11 +282,9 @@ const Index = () => {
                       const h = `${k.value}%`;
                       return (
                         <div key={k.label} className="group relative flex-1 flex flex-col items-center justify-end h-full">
-                          {/* value label */}
                           <span className={`font-display text-sm md:text-base mb-2 tabular-nums transition-colors ${isPeak ? "text-[#F37021]" : "text-white/80"}`}>
                             {k.value}%
                           </span>
-                          {/* bar */}
                           <div
                             className={`relative w-full rounded-t-lg overflow-hidden transition-all duration-300 group-hover:brightness-110 ${
                               isPeak
@@ -304,7 +302,6 @@ const Index = () => {
                       );
                     })}
                   </div>
-                  {/* x-axis labels */}
                   <div className="flex gap-2 md:gap-3 pl-2 mt-4">
                     {kpis.map((k) => (
                       <div key={k.label} className="flex-1 text-center">
@@ -314,6 +311,27 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
+                </div>
+
+                {/* Horizontal bar list — mobile */}
+                <div className="sm:hidden space-y-3">
+                  {kpis.map((k) => {
+                    const isPeak = k.value === maxVal;
+                    return (
+                      <div key={k.label}>
+                        <div className="flex items-baseline justify-between mb-1.5">
+                          <span className="font-mono-label text-[10px] tracking-wide text-white/70">{k.label}</span>
+                          <span className={`font-display text-sm tabular-nums ${isPeak ? "text-[#F37021]" : "text-white/90"}`}>{k.value}%</span>
+                        </div>
+                        <div className="relative h-2 rounded-full bg-white/5 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${isPeak ? "bg-gradient-to-r from-[#F37021] to-[#ff8a3d] shadow-[0_0_12px_rgba(243,112,33,0.6)]" : "bg-white/40"}`}
+                            style={{ width: `${k.value}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
