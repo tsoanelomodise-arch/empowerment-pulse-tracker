@@ -489,23 +489,6 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Provinces list header (reference-style) */}
-              <div className="mb-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono-label text-[11px] tracking-[0.25em] text-white/70">PROVINCES REACHED</span>
-                  <span className="flex-1 h-px bg-white/30" />
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-1.5 text-right sm:text-right">
-                  {["Gauteng", "Western Cape", "KwaZulu-Natal", "Eastern Cape", "Other Provinces"].map((n) => (
-                    <p
-                      key={n}
-                      className="font-mono-label text-[11px] tracking-[0.18em] text-white/75"
-                    >
-                      ZA · <span className="text-white">{n.toUpperCase()}</span>
-                    </p>
-                  ))}
-                </div>
-              </div>
 
               {/* Stylized SA map with connector lines */}
               <div className="relative mb-10">
