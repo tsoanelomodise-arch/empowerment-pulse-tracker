@@ -77,28 +77,32 @@ const Index = () => {
           {/* Main hero title */}
           <div className="flex-1 flex flex-col justify-end pb-6">
             <div className="max-w-5xl ml-auto text-right">
-              <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
-                PERFORMANCE
-                <br />
-                REPORT {REPORT_YEAR}
-              </h1>
-              <p className="mt-6 text-white/85 text-base md:text-lg max-w-xl ml-auto">
-                Driving Economic Transformation and Empowerment Across South Africa
-              </p>
-              <div className="mt-4 flex items-center justify-end gap-2 text-white/70 text-sm">
-                <Target className="w-4 h-4" />
-                <span>Comprehensive overview of measurable impact and development outcomes</span>
-              </div>
-              <div className="mt-8 flex justify-end no-print">
-                <Button
-                  onClick={handleDownloadPDF}
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download PDF Report
-                </Button>
-              </div>
+              <Reveal>
+                <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
+                  PERFORMANCE
+                  <br />
+                  REPORT {REPORT_YEAR}
+                </h1>
+              </Reveal>
+              <Reveal delay={120}>
+                <p className="mt-6 text-white/85 text-base md:text-lg max-w-xl ml-auto">
+                  Driving Economic Transformation and Empowerment Across South Africa
+                </p>
+                <div className="mt-4 flex items-center justify-end gap-2 text-white/70 text-sm">
+                  <Target className="w-4 h-4" />
+                  <span>Comprehensive overview of measurable impact and development outcomes</span>
+                </div>
+                <div className="mt-8 flex justify-end no-print">
+                  <Button
+                    onClick={handleDownloadPDF}
+                    size="lg"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 transition-transform duration-200 hover:scale-[1.03]"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download PDF Report
+                  </Button>
+                </div>
+              </Reveal>
             </div>
           </div>
 
