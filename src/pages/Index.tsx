@@ -3,6 +3,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { SectorCard } from "@/components/SectorCard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
 import {
   TrendingUp,
   Building2,
