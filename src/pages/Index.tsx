@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { HeroMiniBars } from "@/components/HeroMiniBars";
 import { KpiChart } from "@/components/KpiChart";
 import { SectorRings } from "@/components/SectorRings";
+import { CountUp } from "@/components/CountUp";
 import {
   TrendingUp,
   Building2,
