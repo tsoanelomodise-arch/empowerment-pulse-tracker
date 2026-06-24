@@ -121,6 +121,8 @@ const Index = () => {
           </div>
         </div>
 
+        {/* Seamless multicolored blend into Key Metrics */}
+        <BlendTransition />
       </section>
 
       {/* ====== KEY METRICS ====== */}
