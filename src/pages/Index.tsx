@@ -37,7 +37,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* ====== HERO ====== */}
-      <section className="relative min-h-screen p-4 md:p-6 lg:p-8 bg-[#1a1410]">
+      <section className="relative min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 bg-[#1a1410]">
         {/* Background image */}
         <div className="absolute inset-0 overflow-hidden">
           <img
