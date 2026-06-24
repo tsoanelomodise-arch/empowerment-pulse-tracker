@@ -710,24 +710,25 @@ const Index = () => {
             { icon: Briefcase, tint: "primary", title: "Strategic Projects", value: "R3.2bn", desc: "Large-scale transformational projects", count: "124 projects", change: "+26%" },
             { icon: Building2, tint: "success", title: "SME Funding", value: "R4.1bn", desc: "Small and medium enterprise support", count: "2,156 businesses", change: "+34%" },
             { icon: Users, tint: "info", title: "Rural & Community", value: "R1.1bn", desc: "Rural development initiatives", count: "567 projects", change: "+19%" },
-          ].map((p) => (
-            <Card
-              key={p.title}
-              className="group p-8 bg-gradient-card backdrop-blur-sm border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all"
-            >
-              <div className={`inline-flex p-3 rounded-full bg-${p.tint}/10 mb-6`}>
-                <p.icon className={`w-6 h-6 text-${p.tint}`} />
-              </div>
-              <h3 className="font-mono-label text-xs text-muted-foreground mb-3">{p.title}</h3>
-              <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors">
-                {p.value}
-              </p>
-              <p className="text-sm text-muted-foreground mb-6">{p.desc}</p>
-              <div className="flex items-center justify-between pt-4 border-t border-border/60 text-sm">
-                <span className="text-muted-foreground">{p.count}</span>
-                <span className="font-semibold text-success">{p.change}</span>
-              </div>
-            </Card>
+          ].map((p, i) => (
+            <Reveal key={p.title} delay={i * 100}>
+              <Card
+                className="group p-8 bg-gradient-card backdrop-blur-sm border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                <div className={`inline-flex p-3 rounded-full bg-${p.tint}/10 mb-6 transition-transform duration-300 group-hover:scale-110`}>
+                  <p.icon className={`w-6 h-6 text-${p.tint}`} />
+                </div>
+                <h3 className="font-mono-label text-xs text-muted-foreground mb-3">{p.title}</h3>
+                <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {p.value}
+                </p>
+                <p className="text-sm text-muted-foreground mb-6">{p.desc}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-border/60 text-sm">
+                  <span className="text-muted-foreground">{p.count}</span>
+                  <span className="font-semibold text-success">{p.change}</span>
+                </div>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </section>
