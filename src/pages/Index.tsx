@@ -448,38 +448,48 @@ const Index = () => {
             </div>
           </Card>
 
-          <Card className="relative p-0 overflow-hidden border-0 rounded-3xl bg-[#0a0a0a] text-white shadow-2xl">
-            {/* Deep space backdrop */}
+          <Card className="relative p-0 overflow-hidden border-0 rounded-3xl bg-[#070707] text-white shadow-2xl">
+            {/* Atmospheric backdrop — dusty, cinematic */}
             <div
               aria-hidden
               className="absolute inset-0"
               style={{
                 backgroundImage:
-                  "radial-gradient(ellipse at 30% 20%, rgba(45,90,61,0.25) 0, transparent 55%), radial-gradient(ellipse at 75% 80%, rgba(243,112,33,0.12) 0, transparent 60%), linear-gradient(180deg, #0a0a0a 0%, #111814 100%)",
+                  "radial-gradient(ellipse 80% 60% at 20% 15%, rgba(255,255,255,0.06) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 85% 85%, rgba(243,112,33,0.08) 0%, transparent 65%), radial-gradient(ellipse 60% 40% at 60% 50%, rgba(45,90,61,0.10) 0%, transparent 70%), linear-gradient(180deg, #0a0a0a 0%, #050505 100%)",
               }}
             />
-            {/* Grid overlay */}
+            {/* Faint grid */}
             <div
               aria-hidden
-              className="absolute inset-0 opacity-[0.08]"
+              className="absolute inset-0 opacity-[0.06]"
               style={{
                 backgroundImage:
-                  "linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)",
-                backgroundSize: "80px 80px",
+                  "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                backgroundSize: "64px 64px",
               }}
             />
-            {/* Noise / dust */}
+            {/* Dust grain */}
             <div
               aria-hidden
-              className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+              className="absolute inset-0 opacity-[0.18] mix-blend-overlay pointer-events-none"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 15% 60%, rgba(255,255,255,0.08) 0, transparent 25%), radial-gradient(circle at 85% 30%, rgba(255,255,255,0.06) 0, transparent 30%)",
+                  "radial-gradient(circle at 12% 70%, rgba(255,255,255,0.10) 0, transparent 22%), radial-gradient(circle at 78% 22%, rgba(255,255,255,0.08) 0, transparent 28%), radial-gradient(circle at 50% 95%, rgba(255,255,255,0.06) 0, transparent 30%)",
+              }}
+            />
+            {/* Vignette */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage:
+                  "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%)",
               }}
             />
 
             <div className="relative p-8 md:p-10">
-              <div className="flex items-start gap-4 mb-8">
+              {/* Header */}
+              <div className="flex items-start gap-4 mb-10">
                 <div className="p-3 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
                   <MapPin className="w-6 h-6 text-white/80" />
                 </div>
@@ -489,82 +499,107 @@ const Index = () => {
                 </div>
               </div>
 
-
-              {/* Stylized SA map with connector lines */}
+              {/* Cinematic map composition */}
               <div className="relative mb-10">
+                {/* Top-left reference list — echoes "PLACES PHOTOGRAPHED" */}
+                <div className="absolute top-0 left-0 z-10 max-w-[42%]">
+                  <div className="flex items-center gap-3 mb-3">
+                    <p className="font-mono-label text-[10px] tracking-[0.3em] text-white/85 whitespace-nowrap">
+                      PROVINCES REACHED
+                    </p>
+                    <span className="flex-1 h-px bg-white/40" />
+                  </div>
+                  <ul className="space-y-1.5 font-mono-label text-[10px] tracking-[0.22em] text-white/70">
+                    {[
+                      "GAUTENG",
+                      "WESTERN CAPE",
+                      "KWAZULU-NATAL",
+                      "EASTERN CAPE",
+                      "OTHER PROVINCES",
+                    ].map((p) => (
+                      <li key={p} className="text-right">{p}</li>
+                    ))}
+                  </ul>
+                </div>
+
                 <svg
-                  viewBox="0 0 600 420"
+                  viewBox="0 0 600 460"
                   className="w-full h-auto"
                   fill="none"
                   aria-hidden
                 >
                   <defs>
-                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feGaussianBlur stdDeviation="2" result="b" />
+                    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="2.5" result="b" />
                       <feMerge>
                         <feMergeNode in="b" />
                         <feMergeNode in="SourceGraphic" />
                       </feMerge>
                     </filter>
+                    <radialGradient id="mapFill" cx="50%" cy="50%" r="60%">
+                      <stop offset="0%" stopColor="rgba(255,255,255,0.06)" />
+                      <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+                    </radialGradient>
                   </defs>
-                  {/* SA outline (simplified) */}
-                  <path
-                    d="M150,140 L210,115 L260,108 L305,118 L345,108 L385,118 L420,135 L455,160 L480,195 L495,235 L488,275 L470,310 L440,335 L398,348 L355,352 L310,348 L268,338 L228,318 L195,290 L172,255 L158,215 L150,175 Z"
-                    stroke="rgba(255,255,255,0.85)"
-                    strokeWidth="1.5"
-                    fill="rgba(255,255,255,0.02)"
-                  />
-                  {/* Internal province dividers */}
-                  <g stroke="rgba(255,255,255,0.35)" strokeWidth="1" strokeDasharray="3 3">
-                    <path d="M260,108 L270,200 L228,318" />
-                    <path d="M345,108 L330,210 L310,348" />
-                    <path d="M420,135 L370,220 L440,335" />
-                    <path d="M195,290 L330,210 L495,235" />
-                    <path d="M270,200 L370,220" />
-                  </g>
-                  {/* Lesotho hole */}
-                  <circle cx="378" cy="265" r="22" stroke="rgba(255,255,255,0.5)" strokeWidth="1" />
 
-                  {/* Markers + connector lines */}
-                  {/* Gauteng */}
-                  <g filter="url(#glow)">
-                    <circle cx="335" cy="180" r="7" stroke="#F37021" strokeWidth="2" fill="#0a0a0a" />
-                    <circle cx="335" cy="180" r="2.5" fill="#F37021" />
+                  {/* SA outline — hairline white */}
+                  <path
+                    d="M170,170 L225,142 L272,135 L315,145 L352,135 L390,144 L425,160 L460,185 L482,218 L495,255 L487,293 L468,326 L438,350 L398,362 L355,366 L312,362 L272,352 L235,332 L205,304 L184,272 L172,235 L168,200 Z"
+                    stroke="rgba(255,255,255,0.9)"
+                    strokeWidth="1.2"
+                    fill="url(#mapFill)"
+                  />
+                  {/* Internal province dividers — very faint */}
+                  <g stroke="rgba(255,255,255,0.22)" strokeWidth="0.8">
+                    <path d="M272,135 L285,225 L235,332" />
+                    <path d="M352,135 L338,232 L312,362" />
+                    <path d="M425,160 L378,242 L438,350" />
+                    <path d="M205,304 L338,232 L495,255" />
+                    <path d="M285,225 L378,242" />
                   </g>
-                  <path d="M335,180 L335,80 L505,80" stroke="#F37021" strokeWidth="1" />
-                  <text x="510" y="78" fill="#F37021" fontSize="11" letterSpacing="2" fontFamily="monospace">
+                  {/* Lesotho */}
+                  <circle cx="378" cy="282" r="20" stroke="rgba(255,255,255,0.45)" strokeWidth="0.8" />
+
+                  {/* Markers + hairline connector lines (right-anchored labels like reference) */}
+                  {/* Gauteng — featured */}
+                  <g filter="url(#softglow)">
+                    <circle cx="338" cy="205" r="6" stroke="#F37021" strokeWidth="1.4" fill="#070707" />
+                    <circle cx="338" cy="205" r="1.8" fill="#F37021" />
+                  </g>
+                  <path d="M338,205 L505,205 L555,205" stroke="rgba(243,112,33,0.85)" strokeWidth="0.8" />
+                  <text x="510" y="200" fill="#F37021" fontSize="10" letterSpacing="2.5" fontFamily="ui-monospace, Menlo, monospace">
                     GAUTENG · 32%
                   </text>
 
-                  {/* Western Cape */}
-                  <circle cx="225" cy="310" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
-                  <circle cx="225" cy="310" r="2" fill="rgba(255,255,255,0.9)" />
-                  <path d="M225,310 L100,360 L25,360" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
-                  <text x="20" y="358" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
-                    W.CAPE · 24%
-                  </text>
-
                   {/* KZN */}
-                  <circle cx="425" cy="265" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
-                  <circle cx="425" cy="265" r="2" fill="rgba(255,255,255,0.9)" />
-                  <path d="M425,265 L530,260 L575,260" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
-                  <text x="510" y="278" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                  <circle cx="425" cy="280" r="5" stroke="rgba(255,255,255,0.92)" strokeWidth="1" fill="#070707" />
+                  <circle cx="425" cy="280" r="1.6" fill="rgba(255,255,255,0.92)" />
+                  <path d="M425,280 L505,280 L555,280" stroke="rgba(255,255,255,0.55)" strokeWidth="0.7" />
+                  <text x="510" y="276" fill="rgba(255,255,255,0.92)" fontSize="9.5" letterSpacing="2.5" fontFamily="ui-monospace, Menlo, monospace">
                     KZN · 19%
                   </text>
 
                   {/* Eastern Cape */}
-                  <circle cx="370" cy="330" r="6" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" fill="#0a0a0a" />
-                  <circle cx="370" cy="330" r="2" fill="rgba(255,255,255,0.9)" />
-                  <path d="M370,330 L370,395 L505,395" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
-                  <text x="510" y="398" fill="rgba(255,255,255,0.9)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                  <circle cx="370" cy="340" r="5" stroke="rgba(255,255,255,0.92)" strokeWidth="1" fill="#070707" />
+                  <circle cx="370" cy="340" r="1.6" fill="rgba(255,255,255,0.92)" />
+                  <path d="M370,340 L470,395 L555,395" stroke="rgba(255,255,255,0.5)" strokeWidth="0.7" />
+                  <text x="510" y="391" fill="rgba(255,255,255,0.92)" fontSize="9.5" letterSpacing="2.5" fontFamily="ui-monospace, Menlo, monospace">
                     E.CAPE · 15%
                   </text>
 
-                  {/* Other */}
-                  <circle cx="275" cy="200" r="5" stroke="rgba(255,255,255,0.7)" strokeWidth="1.2" fill="#0a0a0a" />
-                  <circle cx="275" cy="200" r="1.8" fill="rgba(255,255,255,0.7)" />
-                  <path d="M275,200 L275,40 L25,40" stroke="rgba(255,255,255,0.45)" strokeWidth="1" />
-                  <text x="20" y="38" fill="rgba(255,255,255,0.75)" fontSize="10" letterSpacing="2" fontFamily="monospace">
+                  {/* Western Cape */}
+                  <circle cx="235" cy="322" r="5" stroke="rgba(255,255,255,0.92)" strokeWidth="1" fill="#070707" />
+                  <circle cx="235" cy="322" r="1.6" fill="rgba(255,255,255,0.92)" />
+                  <path d="M235,322 L165,430 L45,430" stroke="rgba(255,255,255,0.5)" strokeWidth="0.7" />
+                  <text x="50" y="426" fill="rgba(255,255,255,0.92)" fontSize="9.5" letterSpacing="2.5" fontFamily="ui-monospace, Menlo, monospace">
+                    W.CAPE · 24%
+                  </text>
+
+                  {/* Other (northern hub) */}
+                  <circle cx="290" cy="200" r="4.5" stroke="rgba(255,255,255,0.75)" strokeWidth="0.9" fill="#070707" />
+                  <circle cx="290" cy="200" r="1.4" fill="rgba(255,255,255,0.75)" />
+                  <path d="M290,200 L290,150 L505,150" stroke="rgba(255,255,255,0.4)" strokeWidth="0.7" />
+                  <text x="510" y="146" fill="rgba(255,255,255,0.8)" fontSize="9.5" letterSpacing="2.5" fontFamily="ui-monospace, Menlo, monospace">
                     OTHER · 18%
                   </text>
                 </svg>
@@ -583,10 +618,13 @@ const Index = () => {
                 return (
                   <>
                     <div className="relative mb-8 pb-8 border-b border-white/10">
-                      <p className="font-mono-label text-[10px] tracking-[0.25em] text-white/50 mb-3">LEADING REGION</p>
+                      <div className="flex items-center gap-3 mb-4">
+                        <p className="font-mono-label text-[10px] tracking-[0.3em] text-white/50">LEADING REGION</p>
+                        <span className="flex-1 h-px bg-white/10" />
+                      </div>
                       <div className="flex items-end justify-between gap-4 flex-wrap">
                         <div>
-                          <h4 className="font-display text-5xl md:text-6xl text-white leading-none tracking-tight">
+                          <h4 className="font-display text-5xl md:text-6xl text-white leading-none tracking-tight tabular-nums">
                             {hero.pct}
                           </h4>
                           <p className="text-white/60 mt-3 text-sm">{hero.count}</p>
