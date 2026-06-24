@@ -366,11 +366,11 @@ const Index = () => {
                   <span className="font-mono-label text-[10px] text-[#1a1410]/50">of total</span>
                   <span className="font-mono-label text-xs text-success">{s.growth}</span>
                 </div>
-                <p className="font-display text-4xl text-[#1a1410] group-hover:text-primary transition-colors">
-                  {s.percentage}%
+                <p className="font-display text-4xl text-[#1a1410] group-hover:text-primary transition-colors tabular-nums">
+                  <CountUp end={s.percentage} suffix="%" />
                 </p>
                 <h3 className="font-display text-lg text-[#1a1410] mt-2">{s.title}</h3>
-                <p className="text-sm text-[#1a1410]/60 mt-1">{s.value} Enterprises</p>
+                <p className="text-sm text-[#1a1410]/60 mt-1"><CountUp end={parseInt(s.value, 10)} /> Enterprises</p>
               </div>
             ))}
           </div>
