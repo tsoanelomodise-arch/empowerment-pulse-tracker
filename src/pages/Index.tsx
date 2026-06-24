@@ -38,7 +38,23 @@ const SectionLabel = ({ number, title }: { number: string; title: string }) => (
   </div>
 );
 
+const NAV_LINKS = [
+  { href: "#metrics", label: "Metrics" },
+  { href: "#milestones", label: "Milestones" },
+  { href: "#sectors", label: "Sectors" },
+  { href: "#impact", label: "Impact" },
+];
+
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleDownloadPDF = () => {
     window.print();
   };
