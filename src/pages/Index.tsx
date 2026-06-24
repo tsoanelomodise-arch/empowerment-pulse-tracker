@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
 import { HeroMiniBars } from "@/components/HeroMiniBars";
+import { BlendTransition } from "@/components/BlendTransition";
 import { KpiChart } from "@/components/KpiChart";
 import { SectorRings } from "@/components/SectorRings";
 import { CountUp } from "@/components/CountUp";
@@ -120,6 +121,8 @@ const Index = () => {
           </div>
         </div>
 
+        {/* Seamless multicolored blend into Key Metrics */}
+        <BlendTransition />
       </section>
 
       {/* ====== KEY METRICS ====== */}
