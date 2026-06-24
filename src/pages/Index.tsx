@@ -118,10 +118,10 @@ const Index = () => {
 
         {/* Seamless blend into next section */}
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-48 z-10"
+          className="pointer-events-none absolute inset-x-0 -bottom-px h-[60vh] z-10"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(248,246,242,0) 0%, rgba(248,246,242,0.7) 55%, rgba(237,231,223,1) 100%)",
+              "linear-gradient(to bottom, rgba(26,20,16,0) 0%, rgba(26,20,16,0.35) 30%, rgba(120,90,60,0.45) 55%, rgba(237,231,223,0.92) 82%, rgba(248,246,242,1) 100%)",
           }}
         />
       </section>
@@ -129,12 +129,14 @@ const Index = () => {
       {/* ====== KEY METRICS ====== */}
       <section
         id="metrics"
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-20 -mt-16 md:-mt-24"
+        className="relative -mt-[30vh] md:-mt-[35vh] pt-[28vh] md:pt-[32vh] pb-20"
         style={{
           background:
-            "radial-gradient(circle, rgba(248,246,242,1) 0%, rgba(237,231,223,1) 51%, rgba(248,246,242,1) 100%)",
+            "radial-gradient(ellipse at top, rgba(248,246,242,0) 0%, rgba(248,246,242,0.85) 18%, rgba(248,246,242,1) 30%, rgba(237,231,223,1) 70%, rgba(248,246,242,1) 100%)",
         }}
       >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
 
 
         <SectionLabel number="01" title="Key Metrics" />
