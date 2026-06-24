@@ -51,7 +51,7 @@ const Index = () => {
         </div>
 
         {/* Framed inner content (editorial border reference) */}
-        <div className="relative min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border border-white/40 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-10 lg:p-14 flex flex-col">
+        <div className="relative min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border border-white/40 rounded-[1.75rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-6 md:p-10 lg:p-14 flex flex-col">
           {/* Top bar */}
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
