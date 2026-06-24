@@ -517,8 +517,8 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Cinematic map composition */}
-              <div className="relative mb-10">
+              {/* Cinematic map composition — hidden on mobile to avoid microscopic SVG labels */}
+              <div className="relative mb-10 hidden md:block">
                 {/* Top-left reference list — echoes "PLACES PHOTOGRAPHED" */}
                 <div className="absolute top-0 left-0 z-10 max-w-[42%]">
                   <div className="flex items-center gap-3 mb-3">
