@@ -4,6 +4,9 @@ import { SectorCard } from "@/components/SectorCard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
+import { HeroMiniBars } from "@/components/HeroMiniBars";
+import { KpiChart } from "@/components/KpiChart";
+import { SectorRings } from "@/components/SectorRings";
 import {
   TrendingUp,
   Building2,
@@ -171,11 +174,7 @@ const Index = () => {
             </p>
             <div className="mt-10 flex items-end justify-between gap-6 pt-6 border-t border-white/15">
               <p className="text-sm text-white/70 max-w-xs">Cumulative funding to date</p>
-              <div className="hidden md:flex items-end gap-1 h-12">
-                {[40, 55, 48, 70, 65, 82, 78, 95, 88, 100].map((h, i) => (
-                  <span key={i} className="w-2 bg-primary/70 rounded-sm" style={{ height: `${h}%` }} />
-                ))}
-              </div>
+              <HeroMiniBars values={[40, 55, 48, 70, 65, 82, 78, 95, 88, 100]} />
             </div>
           </div>
 
@@ -290,74 +289,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Bar chart — desktop / tablet */}
-                <div className="lg:col-span-7 hidden sm:block">
-                  <div className="relative h-[300px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
-                    {/* gridlines */}
-                    <div className="absolute inset-0 pointer-events-none">
-                      {[100, 75, 50, 25].map((g) => (
-                        <div key={g} className="absolute left-0 right-0 border-t border-dashed border-white/5 flex justify-end pr-1"
-                             style={{ bottom: `${g}%` }}>
-                          <span className="font-mono-label text-[9px] text-white/25 -translate-y-1/2 bg-transparent">{g}</span>
-                        </div>
-                      ))}
-                    </div>
-                    {kpis.map((k) => {
-                      const isPeak = k.value === maxVal;
-                      const h = `${k.value}%`;
-                      return (
-                        <div key={k.label} className="group relative flex-1 flex flex-col items-center justify-end h-full">
-                          <span className={`font-display text-sm md:text-base mb-2 tabular-nums transition-colors ${isPeak ? "text-[#F37021]" : "text-white/80"}`}>
-                            {k.value}%
-                          </span>
-                          <div
-                            className={`relative w-full rounded-t-lg overflow-hidden transition-all duration-300 group-hover:brightness-110 ${
-                              isPeak
-                                ? "bg-gradient-to-t from-[#F37021] to-[#ff8a3d] shadow-[0_0_40px_rgba(243,112,33,0.4)]"
-                                : "bg-white/[0.06] border border-white/10 border-b-0"
-                            }`}
-                            style={{ height: h }}
-                          >
-                            {!isPeak && (
-                              <div className="absolute inset-0 opacity-40"
-                                   style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "6px 6px" }} />
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="flex gap-2 md:gap-3 pl-2 mt-4">
-                    {kpis.map((k) => (
-                      <div key={k.label} className="flex-1 text-center">
-                        <span className="font-mono-label text-[9px] md:text-[10px] tracking-wide text-white/50 leading-tight block">
-                          {k.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Horizontal bar list — mobile */}
-                <div className="sm:hidden space-y-3">
-                  {kpis.map((k) => {
-                    const isPeak = k.value === maxVal;
-                    return (
-                      <div key={k.label}>
-                        <div className="flex items-baseline justify-between mb-1.5">
-                          <span className="font-mono-label text-[10px] tracking-wide text-white/70">{k.label}</span>
-                          <span className={`font-display text-sm tabular-nums ${isPeak ? "text-[#F37021]" : "text-white/90"}`}>{k.value}%</span>
-                        </div>
-                        <div className="relative h-2 rounded-full bg-white/5 overflow-hidden">
-                          <div
-                            className={`h-full rounded-full ${isPeak ? "bg-gradient-to-r from-[#F37021] to-[#ff8a3d] shadow-[0_0_12px_rgba(243,112,33,0.6)]" : "bg-white/40"}`}
-                            style={{ width: `${k.value}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <KpiChart kpis={kpis} maxVal={maxVal} />
               </div>
             </div>
           );
@@ -416,24 +348,7 @@ const Index = () => {
 
             {/* Right: concentric ring infographic */}
             <div className="col-span-12 lg:col-span-7 order-1 lg:order-2 relative">
-              <div className="relative aspect-square max-w-xl mx-auto">
-                <svg viewBox="0 0 400 400" className="w-full h-full">
-                  {[
-                    { r: 180, color: "#1a1410", op: 0.95 },
-                    { r: 150, color: "#3a2f28", op: 0.85 },
-                    { r: 120, color: "#5a4a3f", op: 0.75 },
-                    { r: 90, color: "#8a7868", op: 0.7 },
-                    { r: 60, color: "#F37021", op: 0.95 },
-                  ].map((c, i) => (
-                    <circle key={i} cx="200" cy="200" r={c.r} fill={c.color} opacity={c.op} />
-                  ))}
-                  <path
-                    d="M 200 20 A 180 180 0 0 1 380 200 L 200 200 Z"
-                    fill="#f5f0e6"
-                    opacity="0.18"
-                  />
-                </svg>
-              </div>
+              <SectorRings />
             </div>
           </div>
 
