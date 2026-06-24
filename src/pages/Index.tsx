@@ -285,7 +285,7 @@ const Index = () => {
                     Progress across critical transformation metrics
                   </p>
                   <div className="mt-8 inline-flex items-baseline gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <span className="font-display text-3xl text-[#F37021] tabular-nums">{maxVal}%</span>
+                    <span className="font-display text-3xl text-[#F37021] tabular-nums"><CountUp end={maxVal} suffix="%" /></span>
                     <span className="font-mono-label text-[10px] tracking-[0.18em] text-white/60 uppercase">peak metric</span>
                   </div>
                 </div>
