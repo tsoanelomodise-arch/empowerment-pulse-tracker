@@ -115,10 +115,14 @@ const Index = () => {
             <ArrowDown className="w-5 h-5 text-white/60 animate-bounce" />
           </div>
         </div>
+
+        {/* Seamless blend into next section */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-background/60 to-background z-10" />
       </section>
 
       {/* ====== KEY METRICS ====== */}
-      <section id="metrics" className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
+      <section id="metrics" className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-20 -mt-16 md:-mt-24">
+
         <SectionLabel number="01" title="Key Metrics" />
 
         {/* Editorial header row */}
