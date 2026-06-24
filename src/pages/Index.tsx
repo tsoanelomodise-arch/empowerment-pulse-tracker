@@ -330,8 +330,8 @@ const Index = () => {
                 { title: "Technology & Innovation", value: "384", percentage: 16, growth: "+42%" },
               ].map((s) => (
                 <div key={s.title} className="flex items-baseline gap-6 group">
-                  <p className="font-display text-5xl md:text-6xl text-[#1a1410] group-hover:text-primary transition-colors w-28 shrink-0">
-                    {s.percentage}%
+                  <p className="font-display text-5xl md:text-6xl text-[#1a1410] group-hover:text-primary transition-colors w-28 shrink-0 tabular-nums">
+                    <CountUp end={s.percentage} suffix="%" />
                   </p>
                   <div className="flex-1 border-b border-[#1a1410]/15 pb-3">
                     <div className="flex items-baseline justify-between gap-3">
