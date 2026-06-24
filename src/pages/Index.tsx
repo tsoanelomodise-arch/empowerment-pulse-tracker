@@ -37,7 +37,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* ====== HERO ====== */}
-      <section className="relative min-h-screen p-4 md:p-6 lg:p-8 bg-[#1a1410]">
+      <section className="relative min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 bg-[#1a1410]">
         {/* Background image */}
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -51,7 +51,7 @@ const Index = () => {
         </div>
 
         {/* Framed inner content (editorial border reference) */}
-        <div className="relative min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border border-white/40 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-10 lg:p-14 flex flex-col">
+        <div className="relative min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border border-white/40 rounded-[1.75rem] sm:rounded-[2.5rem] md:rounded-[3rem] p-5 sm:p-6 md:p-10 lg:p-14 flex flex-col">
           {/* Top bar */}
           <header className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ const Index = () => {
           {/* Main hero title */}
           <div className="flex-1 flex flex-col justify-end pb-6">
             <div className="max-w-5xl ml-auto text-right">
-              <h1 className="font-display text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
+              <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
                 PERFORMANCE
                 <br />
                 REPORT {REPORT_YEAR}
@@ -265,9 +265,9 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Bar chart */}
-                <div className="lg:col-span-7">
-                  <div className="relative h-[340px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
+                {/* Bar chart — desktop / tablet */}
+                <div className="lg:col-span-7 hidden sm:block">
+                  <div className="relative h-[300px] md:h-[380px] flex items-end gap-2 md:gap-3 pl-2 border-b border-white/10">
                     {/* gridlines */}
                     <div className="absolute inset-0 pointer-events-none">
                       {[100, 75, 50, 25].map((g) => (
@@ -282,11 +282,9 @@ const Index = () => {
                       const h = `${k.value}%`;
                       return (
                         <div key={k.label} className="group relative flex-1 flex flex-col items-center justify-end h-full">
-                          {/* value label */}
                           <span className={`font-display text-sm md:text-base mb-2 tabular-nums transition-colors ${isPeak ? "text-[#F37021]" : "text-white/80"}`}>
                             {k.value}%
                           </span>
-                          {/* bar */}
                           <div
                             className={`relative w-full rounded-t-lg overflow-hidden transition-all duration-300 group-hover:brightness-110 ${
                               isPeak
@@ -304,7 +302,6 @@ const Index = () => {
                       );
                     })}
                   </div>
-                  {/* x-axis labels */}
                   <div className="flex gap-2 md:gap-3 pl-2 mt-4">
                     {kpis.map((k) => (
                       <div key={k.label} className="flex-1 text-center">
@@ -314,6 +311,27 @@ const Index = () => {
                       </div>
                     ))}
                   </div>
+                </div>
+
+                {/* Horizontal bar list — mobile */}
+                <div className="sm:hidden space-y-3">
+                  {kpis.map((k) => {
+                    const isPeak = k.value === maxVal;
+                    return (
+                      <div key={k.label}>
+                        <div className="flex items-baseline justify-between mb-1.5">
+                          <span className="font-mono-label text-[10px] tracking-wide text-white/70">{k.label}</span>
+                          <span className={`font-display text-sm tabular-nums ${isPeak ? "text-[#F37021]" : "text-white/90"}`}>{k.value}%</span>
+                        </div>
+                        <div className="relative h-2 rounded-full bg-white/5 overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${isPeak ? "bg-gradient-to-r from-[#F37021] to-[#ff8a3d] shadow-[0_0_12px_rgba(243,112,33,0.6)]" : "bg-white/40"}`}
+                            style={{ width: `${k.value}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -499,8 +517,8 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Cinematic map composition */}
-              <div className="relative mb-10">
+              {/* Cinematic map composition — hidden on mobile to avoid microscopic SVG labels */}
+              <div className="relative mb-10 hidden md:block">
                 {/* Top-left reference list — echoes "PLACES PHOTOGRAPHED" */}
                 <div className="absolute top-0 left-0 z-10 max-w-[42%]">
                   <div className="flex items-center gap-3 mb-3">
