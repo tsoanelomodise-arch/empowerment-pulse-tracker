@@ -22,7 +22,10 @@ import {
   BadgeCheck,
   Download,
   ArrowDown,
+  Menu,
 } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
 import nefLogo from "@/assets/nef-logo.png";
 import heroLandscape from "@/assets/hero-bg.jpeg.asset.json";
 import { REPORT_YEAR, reportTitle } from "@/config/report";
@@ -35,13 +38,98 @@ const SectionLabel = ({ number, title }: { number: string; title: string }) => (
   </div>
 );
 
+const NAV_LINKS = [
+  { href: "#metrics", label: "Metrics" },
+  { href: "#milestones", label: "Milestones" },
+  { href: "#sectors", label: "Sectors" },
+  { href: "#impact", label: "Impact" },
+];
+
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleDownloadPDF = () => {
     window.print();
   };
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Sticky compact nav — appears after hero */}
+      <div
+        className={`fixed top-0 inset-x-0 z-50 no-print transition-all duration-300 ${
+          scrolled ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="bg-[#1a1410]/85 backdrop-blur-md border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+            <a href="#" className="flex items-center gap-2 min-w-0">
+              <img src={nefLogo} alt="NEF" className="h-7 w-auto" />
+            </a>
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/85">
+              {NAV_LINKS.map((l) => (
+                <a key={l.href} href={l.href} className="hover:text-primary transition-colors">
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={handleDownloadPDF}
+                size="sm"
+                className="hidden sm:inline-flex bg-primary text-primary-foreground hover:bg-primary/90 rounded-full h-8 px-4 text-xs"
+              >
+                <Download className="w-3.5 h-3.5 mr-1.5" />
+                PDF
+              </Button>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <button
+                    aria-label="Open menu"
+                    className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-full border border-white/30 text-white hover:bg-white/10 transition-colors"
+                  >
+                    <Menu className="w-4 h-4" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[78vw] sm:w-80 bg-[#1a1410] text-white border-l border-white/10 p-0">
+                  <SheetHeader className="px-6 pt-6 pb-4 border-b border-white/10 text-left">
+                    <SheetTitle className="text-white font-display text-2xl">Menu</SheetTitle>
+                    <p className="font-mono-label text-[10px] text-white/50">{REPORT_YEAR} · Performance Report</p>
+                  </SheetHeader>
+                  <nav className="flex flex-col px-2 py-4">
+                    {NAV_LINKS.map((l, i) => (
+                      <SheetClose asChild key={l.href}>
+                        <a
+                          href={l.href}
+                          className="flex items-baseline gap-4 px-4 py-4 rounded-lg hover:bg-white/5 transition-colors"
+                        >
+                          <span className="font-mono-label text-[10px] text-primary w-6">0{i + 1}</span>
+                          <span className="font-display text-xl">{l.label}</span>
+                        </a>
+                      </SheetClose>
+                    ))}
+                  </nav>
+                  <div className="px-6 mt-2">
+                    <SheetClose asChild>
+                      <Button onClick={handleDownloadPDF} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full">
+                        <Download className="w-4 h-4 mr-2" />
+                        Download PDF
+                      </Button>
+                    </SheetClose>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* ====== HERO ====== */}
       <section className="relative min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 bg-[#1a1410]">
         {/* Background image */}
@@ -59,17 +147,61 @@ const Index = () => {
         {/* Framed inner content (editorial border reference) */}
         <div className="relative z-30 min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border-x border-t border-white/40 rounded-t-[1.75rem] sm:rounded-t-[2.5rem] md:rounded-t-[3rem] p-5 sm:p-6 md:p-10 lg:p-14 flex flex-col">
           {/* Top bar */}
-          <header className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <img src={nefLogo} alt="National Empowerment Fund" className="h-10 md:h-12 w-auto" />
+          <header className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0">
+              <img src={nefLogo} alt="National Empowerment Fund" className="h-9 sm:h-10 md:h-12 w-auto shrink-0" />
             </div>
-            <nav className="hidden md:flex items-center gap-8 font-mono-label text-xs text-white/90">
-              <a href="#metrics" className="hover:text-primary transition-colors">Metrics</a>
-              <a href="#milestones" className="hover:text-primary transition-colors">Milestones</a>
-              <a href="#sectors" className="hover:text-primary transition-colors">Sectors</a>
-              <a href="#impact" className="hover:text-primary transition-colors">Impact</a>
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/90">
+              {NAV_LINKS.map((l) => (
+                <a key={l.href} href={l.href} className="relative py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                  {l.label}
+                </a>
+              ))}
             </nav>
-            <span className="hidden md:inline font-mono-label text-xs text-white/70">{REPORT_YEAR}</span>
+            <div className="flex items-center gap-3">
+              <span className="hidden md:inline font-mono-label text-xs text-white/70">{REPORT_YEAR}</span>
+              {/* Mobile menu */}
+              <Sheet>
+                <SheetTrigger asChild>
+                  <button
+                    aria-label="Open menu"
+                    className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-full border border-white/40 text-white hover:bg-white/10 transition-colors no-print"
+                  >
+                    <Menu className="w-5 h-5" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[78vw] sm:w-80 bg-[#1a1410] text-white border-l border-white/10 p-0">
+                  <SheetHeader className="px-6 pt-6 pb-4 border-b border-white/10 text-left">
+                    <SheetTitle className="text-white font-display text-2xl">Menu</SheetTitle>
+                    <p className="font-mono-label text-[10px] text-white/50">{REPORT_YEAR} · Performance Report</p>
+                  </SheetHeader>
+                  <nav className="flex flex-col px-2 py-4">
+                    {NAV_LINKS.map((l, i) => (
+                      <SheetClose asChild key={l.href}>
+                        <a
+                          href={l.href}
+                          className="flex items-baseline gap-4 px-4 py-4 rounded-lg hover:bg-white/5 transition-colors"
+                        >
+                          <span className="font-mono-label text-[10px] text-primary w-6">0{i + 1}</span>
+                          <span className="font-display text-xl">{l.label}</span>
+                        </a>
+                      </SheetClose>
+                    ))}
+                  </nav>
+                  <div className="px-6 mt-2">
+                    <SheetClose asChild>
+                      <Button
+                        onClick={handleDownloadPDF}
+                        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full"
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download PDF
+                      </Button>
+                    </SheetClose>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </header>
 
           {/* Side caption */}
