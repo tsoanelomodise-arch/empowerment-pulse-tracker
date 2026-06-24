@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { HeroMiniBars } from "@/components/HeroMiniBars";
 import { KpiChart } from "@/components/KpiChart";
 import { SectorRings } from "@/components/SectorRings";
+import { CountUp } from "@/components/CountUp";
 import {
   TrendingUp,
   Building2,
@@ -169,8 +170,8 @@ const Index = () => {
               </div>
               <span className="font-mono-label text-xs px-3 py-1 rounded-full border border-primary/40 text-primary">+24%</span>
             </div>
-            <p className="font-display text-7xl md:text-9xl lg:text-[11rem] leading-[0.85] group-hover:text-primary transition-colors">
-              R8.4<span className="text-primary">bn</span>
+            <p className="font-display text-7xl md:text-9xl lg:text-[11rem] leading-[0.85] group-hover:text-primary transition-colors tabular-nums">
+              R<CountUp end={8.4} decimals={1} separator={false} /><span className="text-primary">bn</span>
             </p>
             <div className="mt-10 flex items-end justify-between gap-6 pt-6 border-t border-white/15">
               <p className="text-sm text-white/70 max-w-xs">Cumulative funding to date</p>
@@ -181,9 +182,9 @@ const Index = () => {
           {/* Right column: 3 stacked */}
           <div className="col-span-12 lg:col-span-5 grid grid-cols-1 gap-px bg-border">
             {[
-              { icon: Building2, num: "02", title: "Enterprises Funded", value: "2,847", change: "+18%", desc: "Active businesses supported" },
-              { icon: Users, num: "03", title: "Jobs Created", value: "67,234", change: "+31%", desc: "Direct & indirect employment" },
-              { icon: TrendingUp, num: "04", title: "Transformation Score", value: "89.6%", change: "+12%", desc: "B-BBEE compliance rate" },
+              { icon: Building2, num: "02", title: "Enterprises Funded", end: 2847, decimals: 0, suffix: "", change: "+18%", desc: "Active businesses supported" },
+              { icon: Users, num: "03", title: "Jobs Created", end: 67234, decimals: 0, suffix: "", change: "+31%", desc: "Direct & indirect employment" },
+              { icon: TrendingUp, num: "04", title: "Transformation Score", end: 89.6, decimals: 1, suffix: "%", change: "+12%", desc: "B-BBEE compliance rate" },
             ].map((m) => (
               <div key={m.num} className="bg-background p-6 md:p-8 hover:bg-muted/40 transition-colors group">
                 <div className="flex items-center justify-between mb-4">
@@ -193,8 +194,8 @@ const Index = () => {
                   </div>
                   <span className="font-mono-label text-xs text-success">{m.change}</span>
                 </div>
-                <p className="font-display text-5xl md:text-6xl leading-[0.9] group-hover:text-primary transition-colors">
-                  {m.value}
+                <p className="font-display text-5xl md:text-6xl leading-[0.9] group-hover:text-primary transition-colors tabular-nums">
+                  <CountUp end={m.end} decimals={m.decimals} suffix={m.suffix} />
                 </p>
                 <p className="mt-3 text-xs text-muted-foreground">{m.desc}</p>
               </div>
@@ -224,12 +225,12 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden">
             {[
-              { icon: HandCoins, label: "Approved", value: "R12.8bn", caption: "for black entrepreneurs" },
-              { icon: GraduationCap, label: "Reached", value: "158,000+", caption: "people through community seminars on how to save and invest" },
-              { icon: Building2, label: "Projects worth", value: "R45.2bn", caption: "coinvested to support black industrialists" },
-              { icon: Users, label: "Over", value: "142,000", caption: "jobs created and sustained" },
-              { icon: BadgeCheck, label: "Achieved", value: "20 Years", caption: "of clean external audits" },
-              { icon: TrendingUp, label: "Over", value: "R3.8bn", caption: "has been repaid by investees" },
+              { icon: HandCoins, label: "Approved", end: 12.8, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "for black entrepreneurs" },
+              { icon: GraduationCap, label: "Reached", end: 158000, decimals: 0, prefix: "", suffix: "+", separator: true, caption: "people through community seminars on how to save and invest" },
+              { icon: Building2, label: "Projects worth", end: 45.2, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "coinvested to support black industrialists" },
+              { icon: Users, label: "Over", end: 142000, decimals: 0, prefix: "", suffix: "", separator: true, caption: "jobs created and sustained" },
+              { icon: BadgeCheck, label: "Achieved", end: 20, decimals: 0, prefix: "", suffix: " Years", separator: false, caption: "of clean external audits" },
+              { icon: TrendingUp, label: "Over", end: 3.8, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "has been repaid by investees" },
             ].map((m, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div
@@ -237,8 +238,8 @@ const Index = () => {
                 >
                   <m.icon className="w-7 h-7 text-primary mb-8 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
                   <p className="font-mono-label text-xs text-white/50 mb-3">{m.label}</p>
-                  <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors">
-                    {m.value}
+                  <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors tabular-nums">
+                    <CountUp end={m.end} decimals={m.decimals} prefix={m.prefix} suffix={m.suffix} separator={m.separator} />
                   </p>
                   <p className="text-sm text-white/70 leading-relaxed">{m.caption}</p>
                 </div>
@@ -284,7 +285,7 @@ const Index = () => {
                     Progress across critical transformation metrics
                   </p>
                   <div className="mt-8 inline-flex items-baseline gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                    <span className="font-display text-3xl text-[#F37021] tabular-nums">{maxVal}%</span>
+                    <span className="font-display text-3xl text-[#F37021] tabular-nums"><CountUp end={maxVal} suffix="%" /></span>
                     <span className="font-mono-label text-[10px] tracking-[0.18em] text-white/60 uppercase">peak metric</span>
                   </div>
                 </div>
@@ -329,8 +330,8 @@ const Index = () => {
                 { title: "Technology & Innovation", value: "384", percentage: 16, growth: "+42%" },
               ].map((s) => (
                 <div key={s.title} className="flex items-baseline gap-6 group">
-                  <p className="font-display text-5xl md:text-6xl text-[#1a1410] group-hover:text-primary transition-colors w-28 shrink-0">
-                    {s.percentage}%
+                  <p className="font-display text-5xl md:text-6xl text-[#1a1410] group-hover:text-primary transition-colors w-28 shrink-0 tabular-nums">
+                    <CountUp end={s.percentage} suffix="%" />
                   </p>
                   <div className="flex-1 border-b border-[#1a1410]/15 pb-3">
                     <div className="flex items-baseline justify-between gap-3">
@@ -365,11 +366,11 @@ const Index = () => {
                   <span className="font-mono-label text-[10px] text-[#1a1410]/50">of total</span>
                   <span className="font-mono-label text-xs text-success">{s.growth}</span>
                 </div>
-                <p className="font-display text-4xl text-[#1a1410] group-hover:text-primary transition-colors">
-                  {s.percentage}%
+                <p className="font-display text-4xl text-[#1a1410] group-hover:text-primary transition-colors tabular-nums">
+                  <CountUp end={s.percentage} suffix="%" />
                 </p>
                 <h3 className="font-display text-lg text-[#1a1410] mt-2">{s.title}</h3>
-                <p className="text-sm text-[#1a1410]/60 mt-1">{s.value} Enterprises</p>
+                <p className="text-sm text-[#1a1410]/60 mt-1"><CountUp end={parseInt(s.value, 10)} /> Enterprises</p>
               </div>
             ))}
           </div>
@@ -536,9 +537,9 @@ const Index = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { icon: Briefcase, tint: "primary", title: "Strategic Projects", value: "R3.2bn", desc: "Large-scale transformational projects", count: "124 projects", change: "+26%" },
-            { icon: Building2, tint: "success", title: "SME Funding", value: "R4.1bn", desc: "Small and medium enterprise support", count: "2,156 businesses", change: "+34%" },
-            { icon: Users, tint: "info", title: "Rural & Community", value: "R1.1bn", desc: "Rural development initiatives", count: "567 projects", change: "+19%" },
+            { icon: Briefcase, tint: "primary", title: "Strategic Projects", end: 3.2, decimals: 1, prefix: "R", suffix: "bn", separator: false, desc: "Large-scale transformational projects", count: "124 projects", change: "+26%" },
+            { icon: Building2, tint: "success", title: "SME Funding", end: 4.1, decimals: 1, prefix: "R", suffix: "bn", separator: false, desc: "Small and medium enterprise support", count: "2,156 businesses", change: "+34%" },
+            { icon: Users, tint: "info", title: "Rural & Community", end: 1.1, decimals: 1, prefix: "R", suffix: "bn", separator: false, desc: "Rural development initiatives", count: "567 projects", change: "+19%" },
           ].map((p, i) => (
             <Reveal key={p.title} delay={i * 100}>
               <Card
@@ -548,8 +549,8 @@ const Index = () => {
                   <p.icon className={`w-6 h-6 text-${p.tint}`} />
                 </div>
                 <h3 className="font-mono-label text-xs text-muted-foreground mb-3">{p.title}</h3>
-                <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {p.value}
+                <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors tabular-nums">
+                  <CountUp end={p.end} decimals={p.decimals} prefix={p.prefix} suffix={p.suffix} separator={p.separator} />
                 </p>
                 <p className="text-sm text-muted-foreground mb-6">{p.desc}</p>
                 <div className="flex items-center justify-between pt-4 border-t border-border/60 text-sm">
