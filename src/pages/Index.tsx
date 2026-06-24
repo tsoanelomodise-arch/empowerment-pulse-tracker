@@ -182,9 +182,9 @@ const Index = () => {
           {/* Right column: 3 stacked */}
           <div className="col-span-12 lg:col-span-5 grid grid-cols-1 gap-px bg-border">
             {[
-              { icon: Building2, num: "02", title: "Enterprises Funded", value: "2,847", change: "+18%", desc: "Active businesses supported" },
-              { icon: Users, num: "03", title: "Jobs Created", value: "67,234", change: "+31%", desc: "Direct & indirect employment" },
-              { icon: TrendingUp, num: "04", title: "Transformation Score", value: "89.6%", change: "+12%", desc: "B-BBEE compliance rate" },
+              { icon: Building2, num: "02", title: "Enterprises Funded", end: 2847, decimals: 0, suffix: "", change: "+18%", desc: "Active businesses supported" },
+              { icon: Users, num: "03", title: "Jobs Created", end: 67234, decimals: 0, suffix: "", change: "+31%", desc: "Direct & indirect employment" },
+              { icon: TrendingUp, num: "04", title: "Transformation Score", end: 89.6, decimals: 1, suffix: "%", change: "+12%", desc: "B-BBEE compliance rate" },
             ].map((m) => (
               <div key={m.num} className="bg-background p-6 md:p-8 hover:bg-muted/40 transition-colors group">
                 <div className="flex items-center justify-between mb-4">
@@ -194,8 +194,8 @@ const Index = () => {
                   </div>
                   <span className="font-mono-label text-xs text-success">{m.change}</span>
                 </div>
-                <p className="font-display text-5xl md:text-6xl leading-[0.9] group-hover:text-primary transition-colors">
-                  {m.value}
+                <p className="font-display text-5xl md:text-6xl leading-[0.9] group-hover:text-primary transition-colors tabular-nums">
+                  <CountUp end={m.end} decimals={m.decimals} suffix={m.suffix} />
                 </p>
                 <p className="mt-3 text-xs text-muted-foreground">{m.desc}</p>
               </div>
