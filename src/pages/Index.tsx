@@ -225,12 +225,12 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden">
             {[
-              { icon: HandCoins, label: "Approved", value: "R12.8bn", caption: "for black entrepreneurs" },
-              { icon: GraduationCap, label: "Reached", value: "158,000+", caption: "people through community seminars on how to save and invest" },
-              { icon: Building2, label: "Projects worth", value: "R45.2bn", caption: "coinvested to support black industrialists" },
-              { icon: Users, label: "Over", value: "142,000", caption: "jobs created and sustained" },
-              { icon: BadgeCheck, label: "Achieved", value: "20 Years", caption: "of clean external audits" },
-              { icon: TrendingUp, label: "Over", value: "R3.8bn", caption: "has been repaid by investees" },
+              { icon: HandCoins, label: "Approved", end: 12.8, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "for black entrepreneurs" },
+              { icon: GraduationCap, label: "Reached", end: 158000, decimals: 0, prefix: "", suffix: "+", separator: true, caption: "people through community seminars on how to save and invest" },
+              { icon: Building2, label: "Projects worth", end: 45.2, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "coinvested to support black industrialists" },
+              { icon: Users, label: "Over", end: 142000, decimals: 0, prefix: "", suffix: "", separator: true, caption: "jobs created and sustained" },
+              { icon: BadgeCheck, label: "Achieved", end: 20, decimals: 0, prefix: "", suffix: " Years", separator: false, caption: "of clean external audits" },
+              { icon: TrendingUp, label: "Over", end: 3.8, decimals: 1, prefix: "R", suffix: "bn", separator: false, caption: "has been repaid by investees" },
             ].map((m, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div
@@ -238,8 +238,8 @@ const Index = () => {
                 >
                   <m.icon className="w-7 h-7 text-primary mb-8 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
                   <p className="font-mono-label text-xs text-white/50 mb-3">{m.label}</p>
-                  <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors">
-                    {m.value}
+                  <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors tabular-nums">
+                    <CountUp end={m.end} decimals={m.decimals} prefix={m.prefix} suffix={m.suffix} separator={m.separator} />
                   </p>
                   <p className="text-sm text-white/70 leading-relaxed">{m.caption}</p>
                 </div>
