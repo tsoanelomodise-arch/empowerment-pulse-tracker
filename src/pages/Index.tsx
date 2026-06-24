@@ -140,11 +140,17 @@ const Index = () => {
               Metrics
             </h2>
           </div>
-          <div className="col-span-12 md:col-span-5 md:text-right">
+          <div className="col-span-12 md:col-span-5 md:text-right min-w-0">
             <p className="font-mono-label text-xs text-muted-foreground mb-2">{REPORT_YEAR} / Snapshot</p>
-            <p className="text-sm md:text-base text-muted-foreground md:ml-auto whitespace-nowrap">
+            <p
+              className="text-muted-foreground md:ml-auto whitespace-nowrap"
+              style={{ fontSize: "clamp(0.55rem, 1.7vw, 1rem)" }}
+            >
               Driving Economic Transformation and Empowerment Across South Africa
             </p>
+
+
+
 
           </div>
         </div>
