@@ -117,11 +117,25 @@ const Index = () => {
         </div>
 
         {/* Seamless blend into next section */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent via-background/60 to-background z-10" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-48 z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(248,246,242,0) 0%, rgba(248,246,242,0.7) 55%, rgba(237,231,223,1) 100%)",
+          }}
+        />
       </section>
 
       {/* ====== KEY METRICS ====== */}
-      <section id="metrics" className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-20 -mt-16 md:-mt-24">
+      <section
+        id="metrics"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-12 pb-20 -mt-16 md:-mt-24"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(248,246,242,1) 0%, rgba(237,231,223,1) 51%, rgba(248,246,242,1) 100%)",
+        }}
+      >
+
 
         <SectionLabel number="01" title="Key Metrics" />
 
