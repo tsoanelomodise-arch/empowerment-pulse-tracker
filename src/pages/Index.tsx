@@ -174,11 +174,7 @@ const Index = () => {
             </p>
             <div className="mt-10 flex items-end justify-between gap-6 pt-6 border-t border-white/15">
               <p className="text-sm text-white/70 max-w-xs">Cumulative funding to date</p>
-              <div className="hidden md:flex items-end gap-1 h-12">
-                {[40, 55, 48, 70, 65, 82, 78, 95, 88, 100].map((h, i) => (
-                  <span key={i} className="w-2 bg-primary/70 rounded-sm" style={{ height: `${h}%` }} />
-                ))}
-              </div>
+              <HeroMiniBars values={[40, 55, 48, 70, 65, 82, 78, 95, 88, 100]} />
             </div>
           </div>
 
