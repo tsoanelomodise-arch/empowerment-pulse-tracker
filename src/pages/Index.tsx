@@ -170,8 +170,8 @@ const Index = () => {
               </div>
               <span className="font-mono-label text-xs px-3 py-1 rounded-full border border-primary/40 text-primary">+24%</span>
             </div>
-            <p className="font-display text-7xl md:text-9xl lg:text-[11rem] leading-[0.85] group-hover:text-primary transition-colors">
-              R8.4<span className="text-primary">bn</span>
+            <p className="font-display text-7xl md:text-9xl lg:text-[11rem] leading-[0.85] group-hover:text-primary transition-colors tabular-nums">
+              R<CountUp end={8.4} decimals={1} separator={false} /><span className="text-primary">bn</span>
             </p>
             <div className="mt-10 flex items-end justify-between gap-6 pt-6 border-t border-white/15">
               <p className="text-sm text-white/70 max-w-xs">Cumulative funding to date</p>
