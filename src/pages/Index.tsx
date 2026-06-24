@@ -19,7 +19,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import nefLogo from "@/assets/nef-logo.png";
-import heroLandscape from "@/assets/hero-landscape.jpg";
+import heroLandscape from "@/assets/hero-bg.jpeg.asset.json";
 import { REPORT_YEAR, reportTitle } from "@/config/report";
 
 const SectionLabel = ({ number, title }: { number: string; title: string }) => (
@@ -42,13 +42,12 @@ const Index = () => {
         {/* Background image */}
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src={heroLandscape}
+            src={heroLandscape.url}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-0"
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
         </div>
 
         {/* Framed inner content (editorial border reference) */}
