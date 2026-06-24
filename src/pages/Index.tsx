@@ -3,6 +3,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { SectorCard } from "@/components/SectorCard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/Reveal";
 import {
   TrendingUp,
   Building2,
@@ -76,28 +77,32 @@ const Index = () => {
           {/* Main hero title */}
           <div className="flex-1 flex flex-col justify-end pb-6">
             <div className="max-w-5xl ml-auto text-right">
-              <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
-                PERFORMANCE
-                <br />
-                REPORT {REPORT_YEAR}
-              </h1>
-              <p className="mt-6 text-white/85 text-base md:text-lg max-w-xl ml-auto">
-                Driving Economic Transformation and Empowerment Across South Africa
-              </p>
-              <div className="mt-4 flex items-center justify-end gap-2 text-white/70 text-sm">
-                <Target className="w-4 h-4" />
-                <span>Comprehensive overview of measurable impact and development outcomes</span>
-              </div>
-              <div className="mt-8 flex justify-end no-print">
-                <Button
-                  onClick={handleDownloadPDF}
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download PDF Report
-                </Button>
-              </div>
+              <Reveal>
+                <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.9] break-words">
+                  PERFORMANCE
+                  <br />
+                  REPORT {REPORT_YEAR}
+                </h1>
+              </Reveal>
+              <Reveal delay={120}>
+                <p className="mt-6 text-white/85 text-base md:text-lg max-w-xl ml-auto">
+                  Driving Economic Transformation and Empowerment Across South Africa
+                </p>
+                <div className="mt-4 flex items-center justify-end gap-2 text-white/70 text-sm">
+                  <Target className="w-4 h-4" />
+                  <span>Comprehensive overview of measurable impact and development outcomes</span>
+                </div>
+                <div className="mt-8 flex justify-end no-print">
+                  <Button
+                    onClick={handleDownloadPDF}
+                    size="lg"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 transition-transform duration-200 hover:scale-[1.03]"
+                  >
+                    <Download className="w-5 h-5 mr-2" />
+                    Download PDF Report
+                  </Button>
+                </div>
+              </Reveal>
             </div>
           </div>
 
@@ -208,17 +213,18 @@ const Index = () => {
               { icon: BadgeCheck, label: "Achieved", value: "20 Years", caption: "of clean external audits" },
               { icon: TrendingUp, label: "Over", value: "R3.8bn", caption: "has been repaid by investees" },
             ].map((m, i) => (
-              <div
-                key={i}
-                className="bg-[#1a1410] p-8 md:p-10 hover:bg-[#231a14] transition-colors group"
-              >
-                <m.icon className="w-7 h-7 text-primary mb-8" strokeWidth={1.5} />
-                <p className="font-mono-label text-xs text-white/50 mb-3">{m.label}</p>
-                <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors">
-                  {m.value}
-                </p>
-                <p className="text-sm text-white/70 leading-relaxed">{m.caption}</p>
-              </div>
+              <Reveal key={i} delay={i * 80}>
+                <div
+                  className="bg-[#1a1410] p-8 md:p-10 hover:bg-[#231a14] transition-colors group h-full"
+                >
+                  <m.icon className="w-7 h-7 text-primary mb-8 transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} />
+                  <p className="font-mono-label text-xs text-white/50 mb-3">{m.label}</p>
+                  <p className="font-display text-5xl md:text-6xl mb-4 group-hover:text-primary transition-colors">
+                    {m.value}
+                  </p>
+                  <p className="text-sm text-white/70 leading-relaxed">{m.caption}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -704,24 +710,25 @@ const Index = () => {
             { icon: Briefcase, tint: "primary", title: "Strategic Projects", value: "R3.2bn", desc: "Large-scale transformational projects", count: "124 projects", change: "+26%" },
             { icon: Building2, tint: "success", title: "SME Funding", value: "R4.1bn", desc: "Small and medium enterprise support", count: "2,156 businesses", change: "+34%" },
             { icon: Users, tint: "info", title: "Rural & Community", value: "R1.1bn", desc: "Rural development initiatives", count: "567 projects", change: "+19%" },
-          ].map((p) => (
-            <Card
-              key={p.title}
-              className="group p-8 bg-gradient-card backdrop-blur-sm border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all"
-            >
-              <div className={`inline-flex p-3 rounded-full bg-${p.tint}/10 mb-6`}>
-                <p.icon className={`w-6 h-6 text-${p.tint}`} />
-              </div>
-              <h3 className="font-mono-label text-xs text-muted-foreground mb-3">{p.title}</h3>
-              <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors">
-                {p.value}
-              </p>
-              <p className="text-sm text-muted-foreground mb-6">{p.desc}</p>
-              <div className="flex items-center justify-between pt-4 border-t border-border/60 text-sm">
-                <span className="text-muted-foreground">{p.count}</span>
-                <span className="font-semibold text-success">{p.change}</span>
-              </div>
-            </Card>
+          ].map((p, i) => (
+            <Reveal key={p.title} delay={i * 100}>
+              <Card
+                className="group p-8 bg-gradient-card backdrop-blur-sm border-border/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                <div className={`inline-flex p-3 rounded-full bg-${p.tint}/10 mb-6 transition-transform duration-300 group-hover:scale-110`}>
+                  <p.icon className={`w-6 h-6 text-${p.tint}`} />
+                </div>
+                <h3 className="font-mono-label text-xs text-muted-foreground mb-3">{p.title}</h3>
+                <p className="font-display text-5xl text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {p.value}
+                </p>
+                <p className="text-sm text-muted-foreground mb-6">{p.desc}</p>
+                <div className="flex items-center justify-between pt-4 border-t border-border/60 text-sm">
+                  <span className="text-muted-foreground">{p.count}</span>
+                  <span className="font-semibold text-success">{p.change}</span>
+                </div>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </section>
