@@ -40,14 +40,15 @@ const Index = () => {
       {/* ====== HERO ====== */}
       <section className="relative min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 bg-[#1a1410]">
         {/* Background image */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden rounded-none">
           <img
             src={heroLandscape.url}
             alt=""
-            className="w-full h-full object-cover opacity-0"
+            className="w-full h-full object-cover"
             width={1920}
             height={1080}
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
         </div>
 
         {/* Framed inner content (editorial border reference) */}
