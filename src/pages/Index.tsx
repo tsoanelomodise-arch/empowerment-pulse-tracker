@@ -348,24 +348,7 @@ const Index = () => {
 
             {/* Right: concentric ring infographic */}
             <div className="col-span-12 lg:col-span-7 order-1 lg:order-2 relative">
-              <div className="relative aspect-square max-w-xl mx-auto">
-                <svg viewBox="0 0 400 400" className="w-full h-full">
-                  {[
-                    { r: 180, color: "#1a1410", op: 0.95 },
-                    { r: 150, color: "#3a2f28", op: 0.85 },
-                    { r: 120, color: "#5a4a3f", op: 0.75 },
-                    { r: 90, color: "#8a7868", op: 0.7 },
-                    { r: 60, color: "#F37021", op: 0.95 },
-                  ].map((c, i) => (
-                    <circle key={i} cx="200" cy="200" r={c.r} fill={c.color} opacity={c.op} />
-                  ))}
-                  <path
-                    d="M 200 20 A 180 180 0 0 1 380 200 L 200 200 Z"
-                    fill="#f5f0e6"
-                    opacity="0.18"
-                  />
-                </svg>
-              </div>
+              <SectorRings />
             </div>
           </div>
 
