@@ -206,7 +206,9 @@ const Index = () => {
             ))}
           </div>
         </div>
+        </div>
       </section>
+
 
       {/* ====== LIFE TO DATE MILESTONES ====== */}
       <section id="milestones" className="bg-[#1a1410] text-white py-20 px-4 sm:px-6 lg:px-8">
