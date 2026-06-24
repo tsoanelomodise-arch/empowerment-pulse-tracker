@@ -142,9 +142,11 @@ const Index = () => {
           </div>
           <div className="col-span-12 md:col-span-5 md:text-right">
             <p className="font-mono-label text-xs text-muted-foreground mb-2">{REPORT_YEAR} / Snapshot</p>
-            <p className="text-sm md:text-base text-muted-foreground md:ml-auto whitespace-nowrap">
+            <p className="text-[10px] xs:text-xs sm:text-sm md:text-base text-muted-foreground md:ml-auto whitespace-nowrap">
               Driving Economic Transformation and Empowerment Across South Africa
             </p>
+
+
 
           </div>
         </div>
