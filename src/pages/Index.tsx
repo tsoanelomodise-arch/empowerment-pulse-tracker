@@ -38,7 +38,10 @@ const SectionLabel = ({ number, title }: { number: string; title: string }) => (
   </div>
 );
 
+const HOME_URL = "https://nefwebsitedemo.wonderlandstudio.co.za/";
+
 const NAV_LINKS = [
+  { href: HOME_URL, label: "Home", external: true },
   { href: "#metrics", label: "Metrics" },
   { href: "#milestones", label: "Milestones" },
   { href: "#sectors", label: "Sectors" },
@@ -69,12 +72,12 @@ const Index = () => {
       >
         <div className="bg-[#1a1410]/85 backdrop-blur-md border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
-            <a href="#" className="flex items-center gap-2 min-w-0">
+            <a href={HOME_URL} className="flex items-center gap-2 min-w-0">
               <img src={nefLogo} alt="NEF" className="h-7 w-auto" />
             </a>
             <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/85">
               {NAV_LINKS.map((l) => (
-                <a key={l.href} href={l.href} className="hover:text-primary transition-colors">
+                <a key={l.href} href={l.href} {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="hover:text-primary transition-colors">
                   {l.label}
                 </a>
               ))}
@@ -107,6 +110,7 @@ const Index = () => {
                       <SheetClose asChild key={l.href}>
                         <a
                           href={l.href}
+                          {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                           className="flex items-baseline gap-4 px-4 py-4 rounded-lg hover:bg-white/5 transition-colors"
                         >
                           <span className="font-mono-label text-[10px] text-primary w-6">0{i + 1}</span>
@@ -148,12 +152,12 @@ const Index = () => {
         <div className="relative z-30 min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border-x border-t border-white/40 rounded-t-[1.75rem] sm:rounded-t-[2.5rem] md:rounded-t-[3rem] p-5 sm:p-6 md:p-10 lg:p-14 flex flex-col">
           {/* Top bar */}
           <header className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 min-w-0">
+            <a href={HOME_URL} className="flex items-center gap-3 min-w-0">
               <img src={nefLogo} alt="National Empowerment Fund" className="h-9 sm:h-10 md:h-12 w-auto shrink-0" />
-            </div>
+            </a>
             <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/90">
               {NAV_LINKS.map((l) => (
-                <a key={l.href} href={l.href} className="relative py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                <a key={l.href} href={l.href} {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="relative py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
                   {l.label}
                 </a>
               ))}
@@ -180,6 +184,7 @@ const Index = () => {
                       <SheetClose asChild key={l.href}>
                         <a
                           href={l.href}
+                          {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                           className="flex items-baseline gap-4 px-4 py-4 rounded-lg hover:bg-white/5 transition-colors"
                         >
                           <span className="font-mono-label text-[10px] text-primary w-6">0{i + 1}</span>
