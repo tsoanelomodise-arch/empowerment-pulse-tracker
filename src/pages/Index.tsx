@@ -152,12 +152,12 @@ const Index = () => {
         <div className="relative z-30 min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-2rem)] md:min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-4rem)] border-x border-t border-white/40 rounded-t-[1.75rem] sm:rounded-t-[2.5rem] md:rounded-t-[3rem] p-5 sm:p-6 md:p-10 lg:p-14 flex flex-col">
           {/* Top bar */}
           <header className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 min-w-0">
+            <a href={HOME_URL} className="flex items-center gap-3 min-w-0">
               <img src={nefLogo} alt="National Empowerment Fund" className="h-9 sm:h-10 md:h-12 w-auto shrink-0" />
-            </div>
+            </a>
             <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/90">
               {NAV_LINKS.map((l) => (
-                <a key={l.href} href={l.href} className="relative py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
+                <a key={l.href} href={l.href} {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="relative py-1 hover:text-primary transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left">
                   {l.label}
                 </a>
               ))}
