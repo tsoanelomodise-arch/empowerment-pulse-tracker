@@ -38,7 +38,10 @@ const SectionLabel = ({ number, title }: { number: string; title: string }) => (
   </div>
 );
 
+const HOME_URL = "https://nefwebsitedemo.wonderlandstudio.co.za/";
+
 const NAV_LINKS = [
+  { href: HOME_URL, label: "Home", external: true },
   { href: "#metrics", label: "Metrics" },
   { href: "#milestones", label: "Milestones" },
   { href: "#sectors", label: "Sectors" },
