@@ -72,12 +72,12 @@ const Index = () => {
       >
         <div className="bg-[#1a1410]/85 backdrop-blur-md border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
-            <a href="#" className="flex items-center gap-2 min-w-0">
+            <a href={HOME_URL} className="flex items-center gap-2 min-w-0">
               <img src={nefLogo} alt="NEF" className="h-7 w-auto" />
             </a>
             <nav className="hidden md:flex items-center gap-6 lg:gap-8 font-mono-label text-xs text-white/85">
               {NAV_LINKS.map((l) => (
-                <a key={l.href} href={l.href} className="hover:text-primary transition-colors">
+                <a key={l.href} href={l.href} {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="hover:text-primary transition-colors">
                   {l.label}
                 </a>
               ))}
