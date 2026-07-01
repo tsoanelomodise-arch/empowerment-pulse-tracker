@@ -184,6 +184,7 @@ const Index = () => {
                       <SheetClose asChild key={l.href}>
                         <a
                           href={l.href}
+                          {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                           className="flex items-baseline gap-4 px-4 py-4 rounded-lg hover:bg-white/5 transition-colors"
                         >
                           <span className="font-mono-label text-[10px] text-primary w-6">0{i + 1}</span>
